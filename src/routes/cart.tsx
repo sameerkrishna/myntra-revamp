@@ -18,7 +18,7 @@ export const Route = createFileRoute("/cart")({
       { name: "description", content: "Review your bag with Purchase Confidence powered by Fit Score and friend feedback." },
     ],
   }),
-  component: Cart;
+  component: Cart,
 });
 
 const TABS = ["Items", "Coupons & Bank Offers", "Price Details"] as const;
