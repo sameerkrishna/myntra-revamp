@@ -237,12 +237,12 @@ function Product() {
       </div>
 
       {/* Sticky CTA */}
-      <div className="absolute bottom-0 left-0 right-0 z-40 bg-white border-t border-border grid grid-cols-2 gap-2 p-3">
-        <button onClick={handleAdd} className="rounded-md border border-[#FF3F6C] text-[#FF3F6C] font-bold py-3 text-[14px] flex items-center justify-center gap-2">
-          <ShoppingBag className="h-4 w-4" /> Buy Now
+      <div className="absolute bottom-0 left-0 right-0 z-40 bg-white border-t border-border grid grid-cols-2 p-0">
+        <button onClick={handleAdd} className="border-r border-border text-[#282C3F] font-extrabold py-3.5 text-[14px] flex items-center justify-center gap-2 bg-white">
+          <Zap className="h-4 w-4 text-[#FF3F6C] fill-[#FF3F6C]" /> BUY NOW
         </button>
-        <button onClick={handleAdd} className="rounded-md bg-[#FF3F6C] text-white font-bold py-3 text-[14px] flex items-center justify-center gap-2">
-          <ShoppingBag className="h-4 w-4" /> Add to Bag
+        <button onClick={handleAdd} className="bg-[#FF3F6C] text-white font-extrabold py-3.5 text-[14px] flex items-center justify-center gap-2">
+          <ShoppingBag className="h-4 w-4" /> ADD TO BAG
         </button>
       </div>
 
