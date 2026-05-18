@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Search, Heart, ShoppingBag, MapPin, ChevronRight, Share2, Play, Layers, Star, Truck, RotateCcw } from "lucide-react";
+import { ArrowLeft, Heart, ShoppingBag, MapPin, ChevronRight, Share2, Play, Layers, Star, Truck, RotateCcw, Zap } from "lucide-react";
 import { MLogo } from "@/components/MLogo";
 import { MobileFrame } from "@/components/MobileFrame";
+import { SearchBar } from "@/components/SearchBar";
 import { FitScoreCard } from "@/components/FitScoreCard";
 import { AskFriendsButton } from "@/components/AskFriendsSheet";
 import { SizeSheet } from "@/components/SizeSheet";
@@ -35,7 +36,10 @@ function Product() {
   const nav = useNavigate();
   const [imgIdx, setImgIdx] = useState(0);
   const [sizeOpen, setSizeOpen] = useState(false);
-  const images = [shirt1, shirt2, shirt3];
+  const baseImages = [shirt1, shirt2, shirt3];
+  const images = shop.selectedProductImage && !baseImages.includes(shop.selectedProductImage)
+    ? [shop.selectedProductImage, shirt2, shirt3]
+    : baseImages;
 
   const goCart = () => {
     setShop({ inCart: true });
@@ -52,13 +56,9 @@ function Product() {
       <div className="sticky top-0 z-30 bg-white">
         <div className="flex items-center gap-2 px-3 h-12">
           <Link to="/listing"><ArrowLeft className="h-5 w-5" /></Link>
-          <div className="flex-1 flex items-center gap-2 bg-white rounded-lg pl-2 pr-2 h-9 border border-border">
-            <MLogo className="h-5 w-5" />
-            <span className="text-[13px] text-muted-foreground flex-1">Search in Myntra</span>
-            <Search className="h-4 w-4 text-muted-foreground" />
-          </div>
-          <Heart className="h-5 w-5" />
-          <ShoppingBag className="h-5 w-5" />
+          <SearchBar variant="plain" compact />
+          <Heart className="h-5 w-5 shrink-0" />
+          <ShoppingBag className="h-5 w-5 shrink-0" />
         </div>
       </div>
 
