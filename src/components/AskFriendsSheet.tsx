@@ -25,12 +25,12 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
   );
 }
 
-export function AskFriendsSheet({ open, onOpenChange }: { open: boolean; onOpenChange: (b: boolean) => void }) {
+export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boolean; onOpenChange: (b: boolean) => void; initialStep?: "compose" | "result" }) {
   const shop = useShop();
   const [selected, setSelected] = useState<string[]>(FRIENDS);
   const [scope, setScope] = useState("Product + size");
   const [question, setQuestion] = useState("Does this work for office wear?");
-  const [stage, setStage] = useState<"compose" | "sending" | "result">(shop.askedFriends ? "result" : "compose");
+  const [stage, setStage] = useState<"compose" | "sending" | "result">(initialStep ?? (shop.askedFriends ? "result" : "compose"));
 
   const toggle = (f: string) => setSelected((s) => s.includes(f) ? s.filter((x) => x !== f) : [...s, f]);
 
