@@ -43,11 +43,12 @@ function Listing() {
       <div className="sticky top-0 z-30 bg-white">
         <div className="flex items-center gap-2 px-3 h-12 border-b border-border">
           <Link to="/"><ArrowLeft className="h-5 w-5" /></Link>
-          <MLogo className="h-6 w-6" />
-          <span className="text-[13px] font-extrabold tracking-wide flex-1 truncate">FORMAL SHIRTS FOR ME…</span>
-          <Search className="h-5 w-5" />
-          <Heart className="h-5 w-5" />
-          <ShoppingBag className="h-5 w-5" />
+          <SearchBar variant="plain" compact />
+          <Heart className="h-5 w-5 shrink-0" />
+          <ShoppingBag className="h-5 w-5 shrink-0" />
+        </div>
+        <div className="px-3 py-1.5 text-[12px] font-extrabold tracking-wide truncate bg-white border-b border-border">
+          {(useShop().searchQuery || "Formal Shirts for Men").toUpperCase()}
         </div>
         <div className="bg-[#F4F1FA] px-3 py-2 flex items-center gap-1 text-[12.5px]">
           <MapPin className="h-3.5 w-3.5" /><span className="font-bold">110002</span>
