@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Heart, Star } from "lucide-react";
+import { Heart, Star, Sparkles } from "lucide-react";
+import { setShop } from "@/lib/shop-store";
 
 export type Product = {
   id: string;
@@ -18,6 +19,9 @@ export type Product = {
 };
 
 export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
+  const handleClick = () => {
+    setShop({ selectedProductImage: p.image, selectedProductId: p.id });
+  };
   const card = (
     <div className="bg-white overflow-hidden">
       <div className="relative bg-secondary aspect-[3/4]">
@@ -32,8 +36,9 @@ export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
           {p.rating} <Star className="h-2.5 w-2.5 fill-[#03A685] text-[#03A685]" /> <span className="text-muted-foreground">| {p.reviews}</span>
         </div>
         {p.fitScore && (
-          <span className="absolute top-2 left-2 rounded-full bg-[#E6F7F2] text-[#03A685] text-[10px] font-bold px-2 py-0.5 border border-[#03A685]/30">
-            Fit Score {p.fitScore}%
+          <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-[#F3EEFF] text-[#5A3FBF] text-[10px] font-bold px-2 py-0.5 border border-[#C9B8F5] shadow-sm">
+            <Sparkles className="h-2.5 w-2.5 text-[#5A3FBF]" />
+            Fit {p.fitScore}%
           </span>
         )}
       </div>
@@ -56,5 +61,5 @@ export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
       </div>
     </div>
   );
-  return to ? <Link to={to}>{card}</Link> : card;
+  return to ? <Link to={to} onClick={handleClick}>{card}</Link> : card;
 }

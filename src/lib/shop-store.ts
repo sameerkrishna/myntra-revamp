@@ -7,10 +7,23 @@ export type ShopState = {
   inCart: boolean;
   askedFriends: boolean;
   feedback: FeedbackResult[];
+  searchQuery: string;
+  selectedProductImage: string | null;
+  selectedProductId: string | null;
+  qty: number;
 };
 
 const KEY = "myntra-proto-state-v1";
-const DEFAULT: ShopState = { selectedSize: null, inCart: false, askedFriends: false, feedback: [] };
+const DEFAULT: ShopState = {
+  selectedSize: null,
+  inCart: false,
+  askedFriends: false,
+  feedback: [],
+  searchQuery: "Formal Shirts for Men",
+  selectedProductImage: null,
+  selectedProductId: null,
+  qty: 1,
+};
 
 const listeners = new Set<() => void>();
 let state: ShopState = DEFAULT;

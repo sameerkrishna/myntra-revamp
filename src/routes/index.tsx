@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin, ChevronDown, Mic, Camera, Bell, Heart, User, Grid3x3 } from "lucide-react";
-import { MLogo } from "@/components/MLogo";
+import { MapPin, ChevronDown, Bell, Heart, User, Grid3x3 } from "lucide-react";
 import { MobileFrame } from "@/components/MobileFrame";
 import { BottomNav } from "@/components/BottomNav";
+import { SearchBar } from "@/components/SearchBar";
 import hero from "@/assets/hero-banner.jpg";
 import catFashion from "@/assets/cat-fashion.jpg";
 import catBeauty from "@/assets/cat-beauty.jpg";
@@ -43,12 +43,7 @@ function Home() {
         </div>
 
         <div className="mt-2 flex items-center gap-2">
-          <Link to="/listing" className="flex-1 flex items-center gap-2 bg-white rounded-lg pl-2 pr-2 h-10 border border-white/60 shadow-sm">
-            <MLogo className="h-5 w-5" />
-            <span className="text-[13px] text-muted-foreground flex-1 truncate">"Dresses"</span>
-            <Mic className="h-4 w-4 text-muted-foreground" />
-            <Camera className="h-4 w-4 text-muted-foreground" />
-          </Link>
+          <SearchBar variant="yellow" />
           <div className="relative">
             <Bell className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-[#FF3F6C] text-white text-[8px] flex items-center justify-center font-bold">3</span>
