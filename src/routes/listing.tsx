@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Search, Heart, ShoppingBag, MapPin, ChevronDown, ArrowDownUp, SlidersHorizontal } from "lucide-react";
-import { MLogo } from "@/components/MLogo";
+import { ArrowLeft, Heart, ShoppingBag, MapPin, ChevronDown, ArrowDownUp, SlidersHorizontal } from "lucide-react";
 import { MobileFrame } from "@/components/MobileFrame";
 import { ProductCard } from "@/components/ProductCard";
+import { SearchBar } from "@/components/SearchBar";
+import { useShop } from "@/lib/shop-store";
 import { LISTING } from "@/lib/products";
+import { MLogo } from "@/components/MLogo";
 import catCotton from "@/assets/cat-cotton.jpg";
 import catLinen from "@/assets/cat-linen.jpg";
 import catCuban from "@/assets/cat-cuban.jpg";
