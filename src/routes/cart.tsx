@@ -4,8 +4,8 @@ import { ArrowLeft, MapPin, ChevronDown, Heart, Share2, Trash2, ChevronRight, Tr
 import { MobileFrame } from "@/components/MobileFrame";
 import { MLogo } from "@/components/MLogo";
 import { AskFriendsSheet } from "@/components/AskFriendsSheet";
-import { SizeSheet } from "@/components/SizeSheet";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+
+
 import { MOCK_FEEDBACK, setShop, useShop } from "@/lib/shop-store";
 import { toast } from "sonner";
 import shirt from "@/assets/shirt-white-1.jpg";
@@ -36,8 +36,8 @@ function Cart() {
   const shop = useShop();
   const [askOpen, setAskOpen] = useState(false);
   const [askInitial, setAskInitial] = useState<"compose" | "result">("compose");
-  const [sizeOpen, setSizeOpen] = useState(false);
-  const [qtyOpen, setQtyOpen] = useState(false);
+
+  
   const [active, setActive] = useState<SectionId>("items");
   const size = shop.selectedSize ?? "39";
   const qty = shop.qty ?? 1;
@@ -125,14 +125,28 @@ function Cart() {
             <div className="text-[14px] font-extrabold">{brand}</div>
             <div className="text-[12px] text-muted-foreground truncate">{title}</div>
             <div className="mt-2 flex gap-2">
-              <button
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSizeOpen(true); }}
-                className="rounded-md border border-border text-[12px] px-2 py-1 flex items-center gap-1"
-              >Size: {size} <ChevronDown className="h-3 w-3" /></button>
-              <button
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQtyOpen(true); }}
-                className="rounded-md border border-border text-[12px] px-2 py-1 flex items-center gap-1"
-              >Qty: {qty} <ChevronDown className="h-3 w-3" /></button>
+              <div className="relative">
+                <select
+                  value={size}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                  onChange={(e) => { setShop({ selectedSize: e.target.value }); toast.success(`Size updated to ${e.target.value}`); }}
+                  className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
+                >
+                  {SIZES.map((s) => <option key={s} value={s}>Size: {s}</option>)}
+                </select>
+                <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
+              <div className="relative">
+                <select
+                  value={qty}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                  onChange={(e) => { setShop({ qty: Number(e.target.value) }); toast.success(`Quantity set to ${e.target.value}`); }}
+                  className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
+                >
+                  {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>Qty: {n}</option>)}
+                </select>
+                <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-[14px] font-extrabold">₹{unitPrice.toLocaleString("en-IN")}</span>
@@ -293,30 +307,7 @@ function Cart() {
       </div>
 
       <AskFriendsSheet key={askInitial + String(askOpen)} open={askOpen} onOpenChange={setAskOpen} initialStep={askInitial} />
-      <SizeSheet
-        open={sizeOpen}
-        onOpenChange={setSizeOpen}
-        sizes={SIZES}
-        initial={shop.selectedSize}
-        onDone={(s) => { setShop({ selectedSize: s }); toast.success(`Size updated to ${s}`); }}
-      />
-      <Sheet open={qtyOpen} onOpenChange={setQtyOpen}>
-        <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-2xl p-0">
-          <div className="px-5 pt-5 pb-3"><h3 className="text-[17px] font-extrabold">Select Quantity</h3></div>
-          <div className="px-5 pb-5 grid grid-cols-5 gap-3">
-            {[1, 2, 3, 4, 5].map((n) => {
-              const on = qty === n;
-              return (
-                <button key={n}
-                  onClick={() => { setShop({ qty: n }); setQtyOpen(false); toast.success(`Quantity set to ${n}`); }}
-                  className={`h-14 rounded-xl border text-[15px] font-semibold ${on ? "border-[#FF3F6C] text-[#FF3F6C] bg-[#FFF0F4]" : "border-border text-foreground bg-white"}`}>
-                  {n}
-                </button>
-              );
-            })}
-          </div>
-        </SheetContent>
-      </Sheet>
+
     </MobileFrame>
   );
 }
