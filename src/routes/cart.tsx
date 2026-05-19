@@ -4,8 +4,8 @@ import { ArrowLeft, MapPin, ChevronDown, Heart, Share2, Trash2, ChevronRight, Tr
 import { MobileFrame } from "@/components/MobileFrame";
 import { MLogo } from "@/components/MLogo";
 import { AskFriendsSheet } from "@/components/AskFriendsSheet";
-import { SizeSheet } from "@/components/SizeSheet";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+
+
 import { MOCK_FEEDBACK, setShop, useShop } from "@/lib/shop-store";
 import { toast } from "sonner";
 import shirt from "@/assets/shirt-white-1.jpg";
