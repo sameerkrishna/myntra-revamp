@@ -307,30 +307,7 @@ function Cart() {
       </div>
 
       <AskFriendsSheet key={askInitial + String(askOpen)} open={askOpen} onOpenChange={setAskOpen} initialStep={askInitial} />
-      <SizeSheet
-        open={sizeOpen}
-        onOpenChange={setSizeOpen}
-        sizes={SIZES}
-        initial={shop.selectedSize}
-        onDone={(s) => { setShop({ selectedSize: s }); toast.success(`Size updated to ${s}`); }}
-      />
-      <Sheet open={qtyOpen} onOpenChange={setQtyOpen}>
-        <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-2xl p-0">
-          <div className="px-5 pt-5 pb-3"><h3 className="text-[17px] font-extrabold">Select Quantity</h3></div>
-          <div className="px-5 pb-5 grid grid-cols-5 gap-3">
-            {[1, 2, 3, 4, 5].map((n) => {
-              const on = qty === n;
-              return (
-                <button key={n}
-                  onClick={() => { setShop({ qty: n }); setQtyOpen(false); toast.success(`Quantity set to ${n}`); }}
-                  className={`h-14 rounded-xl border text-[15px] font-semibold ${on ? "border-[#FF3F6C] text-[#FF3F6C] bg-[#FFF0F4]" : "border-border text-foreground bg-white"}`}>
-                  {n}
-                </button>
-              );
-            })}
-          </div>
-        </SheetContent>
-      </Sheet>
+
     </MobileFrame>
   );
 }
