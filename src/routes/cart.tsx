@@ -41,8 +41,13 @@ function Cart() {
   const [active, setActive] = useState<SectionId>("items");
   const size = shop.selectedSize ?? "39";
   const qty = shop.qty ?? 1;
-  const unitPrice = 1249;
-  const unitMrp = 2499;
+  const sp = shop.selectedProduct;
+  const unitPrice = sp?.price ?? 1249;
+  const unitMrp = sp?.mrp ?? 2499;
+  const discountPct = sp?.discount ?? 50;
+  const fitScore = sp?.fitScore ?? 87;
+  const brand = sp?.brand ?? "Louis Philippe";
+  const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cott…";
   const recCount = MOCK_FEEDBACK.filter((f) => f.recommend).length;
 
   const sectionRefs = useRef<Record<SectionId, HTMLElement | null>>({ items: null, coupons: null, price: null });
@@ -69,7 +74,10 @@ function Cart() {
   const platform = 23;
   const grand = total + platform;
 
-  const openFeedback = () => { setAskInitial("result"); setAskOpen(true); };
+  const openFeedback = () => {
+    if (!shop.askedFriends) setShop({ askedFriends: true, feedback: MOCK_FEEDBACK });
+    setAskInitial("result"); setAskOpen(true);
+  };
   const openAskAgain = () => { setAskInitial("compose"); setAskOpen(true); };
 
   return (
@@ -112,10 +120,10 @@ function Cart() {
         </div>
 
         <Link to="/product" className="block bg-white rounded-2xl p-3 flex gap-3 border border-border">
-          <img src={shop.selectedProductImage ?? shirt} alt="" className="h-28 w-24 rounded-lg object-cover" />
+          <img src={sp?.image ?? shop.selectedProductImage ?? shirt} alt="" className="h-28 w-24 rounded-lg object-cover" />
           <div className="flex-1 min-w-0">
-            <div className="text-[14px] font-extrabold">Louis Philippe</div>
-            <div className="text-[12px] text-muted-foreground truncate">Men Slim Fit Easy to Iron Premium Cott…</div>
+            <div className="text-[14px] font-extrabold">{brand}</div>
+            <div className="text-[12px] text-muted-foreground truncate">{title}</div>
             <div className="mt-2 flex gap-2">
               <button
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSizeOpen(true); }}
@@ -129,7 +137,7 @@ function Cart() {
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-[14px] font-extrabold">₹{unitPrice.toLocaleString("en-IN")}</span>
               <span className="text-[11px] line-through text-muted-foreground">₹{unitMrp.toLocaleString("en-IN")}</span>
-              <span className="text-[11px] font-bold text-[#FF905A]">50% Off</span>
+              <span className="text-[11px] font-bold text-[#FF905A]">{discountPct}% Off</span>
               <Info className="h-3 w-3 text-muted-foreground ml-0.5" />
             </div>
             <div className="mt-1.5 text-[11.5px] text-muted-foreground flex items-center gap-1">↻ 14 days return</div>
@@ -142,7 +150,7 @@ function Cart() {
           <div className="flex items-center gap-2 mb-2">
             <span className="h-7 w-7 rounded-full bg-[#F3EEFF] text-[#5A3FBF] flex items-center justify-center"><Sparkles className="h-4 w-4" /></span>
             <span className="text-[13px] font-extrabold">Purchase Confidence</span>
-            <span className="ml-auto text-[11px] font-bold bg-[#F3EEFF] text-[#5A3FBF] border border-[#C9B8F5] rounded-full px-2 py-0.5">Fit Score 87%</span>
+            <span className="ml-auto text-[11px] font-bold bg-[#F3EEFF] text-[#5A3FBF] border border-[#C9B8F5] rounded-full px-2 py-0.5">Fit Score {fitScore}%</span>
           </div>
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
@@ -152,10 +160,11 @@ function Cart() {
             </div>
           </div>
           <div className="mt-2 grid grid-cols-2 gap-2">
-            <button onClick={openFeedback} disabled={!shop.askedFriends} className="rounded-full border border-[#FF3F6C] text-[#FF3F6C] py-2 text-[12.5px] font-semibold disabled:opacity-50">View feedback</button>
+            <button onClick={openFeedback} className="rounded-full border border-[#FF3F6C] text-[#FF3F6C] py-2 text-[12.5px] font-semibold">View feedback</button>
             <button onClick={openAskAgain} className="rounded-full bg-[#FFF0F4] text-[#FF3F6C] py-2 text-[12.5px] font-semibold">{shop.askedFriends ? "Ask again" : "Ask friends"}</button>
           </div>
         </div>
+
 
         <h3 className="text-[15px] font-extrabold pt-1">Get Summer Ready</h3>
         <div className="bg-white rounded-2xl p-3 border border-border">
@@ -283,7 +292,7 @@ function Cart() {
         >Place Order</button>
       </div>
 
-      <AskFriendsSheet open={askOpen} onOpenChange={setAskOpen} initialStep={askInitial} />
+      <AskFriendsSheet key={askInitial + String(askOpen)} open={askOpen} onOpenChange={setAskOpen} initialStep={askInitial} />
       <SizeSheet
         open={sizeOpen}
         onOpenChange={setSizeOpen}

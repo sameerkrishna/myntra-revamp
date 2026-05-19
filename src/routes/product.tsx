@@ -36,9 +36,17 @@ function Product() {
   const nav = useNavigate();
   const [imgIdx, setImgIdx] = useState(0);
   const [sizeOpen, setSizeOpen] = useState(false);
+  const sp = shop.selectedProduct;
+  const brand = sp?.brand ?? PRIMARY_PRODUCT.brand;
+  const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cotton Full Sleeve Formal Shirt";
+  const price = sp?.price ?? PRIMARY_PRODUCT.price;
+  const mrp = sp?.mrp ?? PRIMARY_PRODUCT.mrp;
+  const discount = sp?.discount ?? PRIMARY_PRODUCT.discount;
+  const fitScore = sp?.fitScore ?? PRIMARY_PRODUCT.fitScore ?? 87;
+  const heroImg = shop.selectedProductImage ?? shirt1;
   const baseImages = [shirt1, shirt2, shirt3];
-  const images = shop.selectedProductImage && !baseImages.includes(shop.selectedProductImage)
-    ? [shop.selectedProductImage, shirt2, shirt3]
+  const images = !baseImages.includes(heroImg)
+    ? [heroImg, shirt2, shirt3]
     : baseImages;
 
   const goCart = () => {
@@ -113,7 +121,7 @@ function Product() {
       <div className="bg-white px-4 pb-3">
         <div className="flex items-start gap-3">
           <div className="flex-1">
-            <h1 className="text-[16px] leading-snug"><span className="font-extrabold">Louis Philippe</span> <span className="text-foreground">Men Slim Fit Easy to Iron Premium Cotton Full Sleeve Formal Shirt</span></h1>
+            <h1 className="text-[16px] leading-snug"><span className="font-extrabold">{brand}</span> <span className="text-foreground">{title}</span></h1>
           </div>
           <div className="flex gap-2">
             <button className="h-9 w-9 rounded-lg border border-border flex items-center justify-center"><Share2 className="h-4 w-4" /></button>
@@ -121,9 +129,9 @@ function Product() {
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-[12px] text-muted-foreground">MRP <span className="line-through">₹2,499</span></span>
-          <span className="text-[18px] font-extrabold">₹1,249</span>
-          <span className="bg-[#FF3F6C] text-white text-[11px] font-bold px-2 py-0.5 rounded">50% OFF!</span>
+          <span className="text-[12px] text-muted-foreground">MRP <span className="line-through">₹{mrp.toLocaleString("en-IN")}</span></span>
+          <span className="text-[18px] font-extrabold">₹{price.toLocaleString("en-IN")}</span>
+          <span className="bg-[#FF3F6C] text-white text-[11px] font-bold px-2 py-0.5 rounded">{discount}% OFF!</span>
         </div>
 
         {/* Coupon */}
@@ -171,11 +179,22 @@ function Product() {
             })}
           </div>
         </div>
+
+        {/* CTAs after size selection */}
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <button onClick={handleAdd} className="rounded-md border border-[#FF3F6C] text-[#FF3F6C] font-extrabold py-3 text-[13px] flex items-center justify-center gap-2 bg-white">
+            <Zap className="h-4 w-4 fill-[#FF3F6C]" /> BUY NOW
+          </button>
+          <button onClick={handleAdd} className="rounded-md bg-[#FF3F6C] text-white font-extrabold py-3 text-[13px] flex items-center justify-center gap-2">
+            <ShoppingBag className="h-4 w-4" /> ADD TO BAG
+          </button>
+        </div>
       </div>
 
       {/* New features */}
-      <FitScoreCard size={shop.selectedSize} />
+      <FitScoreCard size={shop.selectedSize} score={fitScore} />
       <AskFriendsButton />
+
 
       {/* Delivery & specs */}
       <div className="bg-background px-4 py-4 space-y-3">
@@ -236,15 +255,6 @@ function Product() {
         </div>
       </div>
 
-      {/* Sticky CTA */}
-      <div className="absolute bottom-0 left-0 right-0 z-40 bg-white border-t border-border grid grid-cols-2 p-0">
-        <button onClick={handleAdd} className="border-r border-border text-[#282C3F] font-extrabold py-3.5 text-[14px] flex items-center justify-center gap-2 bg-white">
-          <Zap className="h-4 w-4 text-[#FF3F6C] fill-[#FF3F6C]" /> BUY NOW
-        </button>
-        <button onClick={handleAdd} className="bg-[#FF3F6C] text-white font-extrabold py-3.5 text-[14px] flex items-center justify-center gap-2">
-          <ShoppingBag className="h-4 w-4" /> ADD TO BAG
-        </button>
-      </div>
 
       <SizeSheet
         open={sizeOpen}

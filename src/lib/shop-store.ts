@@ -2,6 +2,17 @@ import { useEffect, useState } from "react";
 
 export type FeedbackResult = { name: string; text: string; recommend: boolean };
 
+export type SelectedProduct = {
+  id: string;
+  brand: string;
+  title: string;
+  price: number;
+  mrp: number;
+  discount: number;
+  fitScore?: number;
+  image: string;
+};
+
 export type ShopState = {
   selectedSize: string | null;
   inCart: boolean;
@@ -10,6 +21,7 @@ export type ShopState = {
   searchQuery: string;
   selectedProductImage: string | null;
   selectedProductId: string | null;
+  selectedProduct: SelectedProduct | null;
   qty: number;
 };
 
@@ -22,6 +34,7 @@ const DEFAULT: ShopState = {
   searchQuery: "Formal Shirts for Men",
   selectedProductImage: null,
   selectedProductId: null,
+  selectedProduct: null,
   qty: 1,
 };
 
