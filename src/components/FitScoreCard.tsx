@@ -10,8 +10,9 @@ const breakdown = [
   { label: "Return signal", value: "Lower return rate than similar shirts" },
 ];
 
-export function FitScoreCard({ size }: { size: string | null }) {
+export function FitScoreCard({ size, score = 87 }: { size: string | null; score?: number }) {
   const [open, setOpen] = useState(false);
+  const pct = score / 100;
   return (
     <div className="mx-4 my-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
       <div className="flex items-center gap-3">
@@ -22,10 +23,10 @@ export function FitScoreCard({ size }: { size: string | null }) {
               cx="32" cy="32" r="28"
               stroke="#03A685" strokeWidth="6" fill="none" strokeLinecap="round"
               strokeDasharray={`${2 * Math.PI * 28}`}
-              strokeDashoffset={`${2 * Math.PI * 28 * (1 - 0.87)}`}
+              strokeDashoffset={`${2 * Math.PI * 28 * (1 - pct)}`}
             />
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center text-[15px] font-extrabold text-[#03A685]">87%</div>
+          <div className="absolute inset-0 flex items-center justify-center text-[15px] font-extrabold text-[#03A685]">{score}%</div>
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 text-[13px] font-bold">
@@ -36,6 +37,7 @@ export function FitScoreCard({ size }: { size: string | null }) {
           </div>
         </div>
       </div>
+
 
       <ul className="mt-3 space-y-2 border-t border-border pt-3">
         {breakdown.map((b) => (
