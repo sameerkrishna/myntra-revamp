@@ -20,7 +20,15 @@ export type Product = {
 
 export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
   const handleClick = () => {
-    setShop({ selectedProductImage: p.image, selectedProductId: p.id });
+    setShop({
+      selectedProductImage: p.image,
+      selectedProductId: p.id,
+      selectedProduct: {
+        id: p.id, brand: p.brand, title: p.title,
+        price: p.price, mrp: p.mrp, discount: p.discount,
+        fitScore: p.fitScore, image: p.image,
+      },
+    });
   };
   const card = (
     <div className="bg-white overflow-hidden">
