@@ -74,7 +74,10 @@ function Cart() {
   const platform = 23;
   const grand = total + platform;
 
-  const openFeedback = () => { setAskInitial("result"); setAskOpen(true); };
+  const openFeedback = () => {
+    if (!shop.askedFriends) setShop({ askedFriends: true, feedback: MOCK_FEEDBACK });
+    setAskInitial("result"); setAskOpen(true);
+  };
   const openAskAgain = () => { setAskInitial("compose"); setAskOpen(true); };
 
   return (
