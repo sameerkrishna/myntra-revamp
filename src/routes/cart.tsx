@@ -36,7 +36,7 @@ function Cart() {
   const shop = useShop();
   const [askOpen, setAskOpen] = useState(false);
   const [askInitial, setAskInitial] = useState<"compose" | "result">("compose");
-  const [sizeOpen, setSizeOpen] = useState(false);
+
   const [qtyOpen, setQtyOpen] = useState(false);
   const [active, setActive] = useState<SectionId>("items");
   const size = shop.selectedSize ?? "39";
