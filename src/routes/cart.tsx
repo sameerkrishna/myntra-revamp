@@ -292,7 +292,7 @@ function Cart() {
         >Place Order</button>
       </div>
 
-      <AskFriendsSheet open={askOpen} onOpenChange={setAskOpen} initialStep={askInitial} />
+      <AskFriendsSheet key={askInitial + String(askOpen)} open={askOpen} onOpenChange={setAskOpen} initialStep={askInitial} />
       <SizeSheet
         open={sizeOpen}
         onOpenChange={setSizeOpen}
