@@ -121,7 +121,7 @@ function Product() {
       <div className="bg-white px-4 pb-3">
         <div className="flex items-start gap-3">
           <div className="flex-1">
-            <h1 className="text-[16px] leading-snug"><span className="font-extrabold">Louis Philippe</span> <span className="text-foreground">Men Slim Fit Easy to Iron Premium Cotton Full Sleeve Formal Shirt</span></h1>
+            <h1 className="text-[16px] leading-snug"><span className="font-extrabold">{brand}</span> <span className="text-foreground">{title}</span></h1>
           </div>
           <div className="flex gap-2">
             <button className="h-9 w-9 rounded-lg border border-border flex items-center justify-center"><Share2 className="h-4 w-4" /></button>
@@ -129,9 +129,9 @@ function Product() {
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-[12px] text-muted-foreground">MRP <span className="line-through">₹2,499</span></span>
-          <span className="text-[18px] font-extrabold">₹1,249</span>
-          <span className="bg-[#FF3F6C] text-white text-[11px] font-bold px-2 py-0.5 rounded">50% OFF!</span>
+          <span className="text-[12px] text-muted-foreground">MRP <span className="line-through">₹{mrp.toLocaleString("en-IN")}</span></span>
+          <span className="text-[18px] font-extrabold">₹{price.toLocaleString("en-IN")}</span>
+          <span className="bg-[#FF3F6C] text-white text-[11px] font-bold px-2 py-0.5 rounded">{discount}% OFF!</span>
         </div>
 
         {/* Coupon */}
