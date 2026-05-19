@@ -125,14 +125,28 @@ function Cart() {
             <div className="text-[14px] font-extrabold">{brand}</div>
             <div className="text-[12px] text-muted-foreground truncate">{title}</div>
             <div className="mt-2 flex gap-2">
-              <button
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setSizeOpen(true); }}
-                className="rounded-md border border-border text-[12px] px-2 py-1 flex items-center gap-1"
-              >Size: {size} <ChevronDown className="h-3 w-3" /></button>
-              <button
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQtyOpen(true); }}
-                className="rounded-md border border-border text-[12px] px-2 py-1 flex items-center gap-1"
-              >Qty: {qty} <ChevronDown className="h-3 w-3" /></button>
+              <div className="relative">
+                <select
+                  value={size}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                  onChange={(e) => { setShop({ selectedSize: e.target.value }); toast.success(`Size updated to ${e.target.value}`); }}
+                  className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
+                >
+                  {SIZES.map((s) => <option key={s} value={s}>Size: {s}</option>)}
+                </select>
+                <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
+              <div className="relative">
+                <select
+                  value={qty}
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                  onChange={(e) => { setShop({ qty: Number(e.target.value) }); toast.success(`Quantity set to ${e.target.value}`); }}
+                  className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
+                >
+                  {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>Qty: {n}</option>)}
+                </select>
+                <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-[14px] font-extrabold">₹{unitPrice.toLocaleString("en-IN")}</span>
