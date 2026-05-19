@@ -179,11 +179,22 @@ function Product() {
             })}
           </div>
         </div>
+
+        {/* CTAs after size selection */}
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <button onClick={handleAdd} className="rounded-md border border-[#FF3F6C] text-[#FF3F6C] font-extrabold py-3 text-[13px] flex items-center justify-center gap-2 bg-white">
+            <Zap className="h-4 w-4 fill-[#FF3F6C]" /> BUY NOW
+          </button>
+          <button onClick={handleAdd} className="rounded-md bg-[#FF3F6C] text-white font-extrabold py-3 text-[13px] flex items-center justify-center gap-2">
+            <ShoppingBag className="h-4 w-4" /> ADD TO BAG
+          </button>
+        </div>
       </div>
 
       {/* New features */}
-      <FitScoreCard size={shop.selectedSize} />
+      <FitScoreCard size={shop.selectedSize} score={fitScore} />
       <AskFriendsButton />
+
 
       {/* Delivery & specs */}
       <div className="bg-background px-4 py-4 space-y-3">
