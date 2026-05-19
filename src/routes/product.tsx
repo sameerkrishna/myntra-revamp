@@ -36,9 +36,17 @@ function Product() {
   const nav = useNavigate();
   const [imgIdx, setImgIdx] = useState(0);
   const [sizeOpen, setSizeOpen] = useState(false);
+  const sp = shop.selectedProduct;
+  const brand = sp?.brand ?? PRIMARY_PRODUCT.brand;
+  const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cotton Full Sleeve Formal Shirt";
+  const price = sp?.price ?? PRIMARY_PRODUCT.price;
+  const mrp = sp?.mrp ?? PRIMARY_PRODUCT.mrp;
+  const discount = sp?.discount ?? PRIMARY_PRODUCT.discount;
+  const fitScore = sp?.fitScore ?? PRIMARY_PRODUCT.fitScore ?? 87;
+  const heroImg = shop.selectedProductImage ?? shirt1;
   const baseImages = [shirt1, shirt2, shirt3];
-  const images = shop.selectedProductImage && !baseImages.includes(shop.selectedProductImage)
-    ? [shop.selectedProductImage, shirt2, shirt3]
+  const images = !baseImages.includes(heroImg)
+    ? [heroImg, shirt2, shirt3]
     : baseImages;
 
   const goCart = () => {
