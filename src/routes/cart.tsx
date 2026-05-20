@@ -77,8 +77,8 @@ function Cart() {
   const grand = total + platform;
 
   const openFeedback = () => {
-    if (!shop.askedFriends) setShop({ askedFriends: true, feedback: MOCK_FEEDBACK });
-    setAskInitial("result"); setAskOpen(true);
+    setAskInitial(shop.askedFriends && feedbackList.length > 0 ? "result" : "compose");
+    setAskOpen(true);
   };
   const openAskAgain = () => { setAskInitial("compose"); setAskOpen(true); };
 
