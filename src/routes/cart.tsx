@@ -171,8 +171,14 @@ function Cart() {
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
             <div className="text-[12.5px] leading-snug">
-              <span className="font-bold">{shop.askedFriends ? `${recCount} friends recommend buying.` : "Ask friends for quick feedback."}</span>
-              {shop.askedFriends && <span className="text-muted-foreground"> Riya suggested checking fabric thickness.</span>}
+              {feedbackList.length > 0 ? (
+                <>
+                  <span className="font-bold">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>
+                  {suggestNames.length > 0 && <span className="text-muted-foreground"> {suggestNames.join(", ")} suggested checking fabric thickness.</span>}
+                </>
+              ) : (
+                <span className="font-bold">Ask friends for quick feedback.</span>
+              )}
             </div>
           </div>
           <div className="mt-2 grid grid-cols-2 gap-2">
