@@ -48,7 +48,9 @@ function Cart() {
   const fitScore = sp?.fitScore ?? 87;
   const brand = sp?.brand ?? "Louis Philippe";
   const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cott…";
-  const recCount = MOCK_FEEDBACK.filter((f) => f.recommend).length;
+  const feedbackList = shop.feedback ?? [];
+  const recCount = feedbackList.filter((f) => f.recommend).length;
+  const suggestNames = feedbackList.filter((f) => !f.recommend).map((f) => f.name);
 
   const sectionRefs = useRef<Record<SectionId, HTMLElement | null>>({ items: null, coupons: null, price: null });
 
