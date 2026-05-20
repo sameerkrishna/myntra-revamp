@@ -110,7 +110,12 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
         {stage === "result" && (
           <div className="px-5 py-4 space-y-3">
             <div className="text-[12px] font-semibold text-muted-foreground">FRIENDS' FEEDBACK</div>
-            {MOCK_FEEDBACK.map((f) => (
+            {feedbackList.length === 0 && (
+              <div className="rounded-2xl border border-dashed border-border bg-white p-4 text-center text-[12.5px] text-muted-foreground">
+                No feedback yet. Ask friends to get quick opinions.
+              </div>
+            )}
+            {feedbackList.map((f) => (
               <div key={f.name} className="rounded-2xl border border-border bg-white p-3">
                 <div className="flex items-center gap-2">
                   <span className="h-7 w-7 rounded-full bg-gradient-to-br from-[#F13AB1] to-[#FF905A] text-white text-[12px] font-bold flex items-center justify-center">{f.name[0]}</span>
@@ -123,10 +128,14 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
               </div>
             ))}
 
-            <div className="rounded-2xl bg-[#FFF0F4] border border-[#FFD2DF] p-3 text-[12.5px]">
-              <span className="font-semibold text-[#FF3F6C]">{recCount} friends recommend buying.</span>{" "}
-              <span className="text-foreground">{MOCK_FEEDBACK.length - recCount} friend suggests checking fabric thickness.</span>
-            </div>
+            {feedbackList.length > 0 && (
+              <div className="rounded-2xl bg-[#FFF0F4] border border-[#FFD2DF] p-3 text-[12.5px]">
+                <span className="font-semibold text-[#FF3F6C]">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>{" "}
+                {feedbackList.length - recCount > 0 && (
+                  <span className="text-foreground">{feedbackList.length - recCount} {feedbackList.length - recCount === 1 ? "friend suggests" : "friends suggest"} checking fabric thickness.</span>
+                )}
+              </div>
+            )}
 
             <button onClick={() => onOpenChange(false)} className="w-full rounded-full bg-[#FF3F6C] py-3 text-sm font-bold text-white">
               Add to Bag with feedback
