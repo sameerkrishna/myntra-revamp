@@ -6,7 +6,7 @@ import { MLogo } from "@/components/MLogo";
 import { AskFriendsSheet } from "@/components/AskFriendsSheet";
 
 
-import { MOCK_FEEDBACK, setShop, useShop } from "@/lib/shop-store";
+import { setShop, useShop } from "@/lib/shop-store";
 import { toast } from "sonner";
 import shirt from "@/assets/shirt-white-1.jpg";
 import capRed from "@/assets/cap-red.jpg";
@@ -48,7 +48,9 @@ function Cart() {
   const fitScore = sp?.fitScore ?? 87;
   const brand = sp?.brand ?? "Louis Philippe";
   const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cott…";
-  const recCount = MOCK_FEEDBACK.filter((f) => f.recommend).length;
+  const feedbackList = shop.feedback ?? [];
+  const recCount = feedbackList.filter((f) => f.recommend).length;
+  const suggestNames = feedbackList.filter((f) => !f.recommend).map((f) => f.name);
 
   const sectionRefs = useRef<Record<SectionId, HTMLElement | null>>({ items: null, coupons: null, price: null });
 
@@ -75,8 +77,8 @@ function Cart() {
   const grand = total + platform;
 
   const openFeedback = () => {
-    if (!shop.askedFriends) setShop({ askedFriends: true, feedback: MOCK_FEEDBACK });
-    setAskInitial("result"); setAskOpen(true);
+    setAskInitial(shop.askedFriends && feedbackList.length > 0 ? "result" : "compose");
+    setAskOpen(true);
   };
   const openAskAgain = () => { setAskInitial("compose"); setAskOpen(true); };
 
@@ -169,8 +171,14 @@ function Cart() {
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
             <div className="text-[12.5px] leading-snug">
-              <span className="font-bold">{shop.askedFriends ? `${recCount} friends recommend buying.` : "Ask friends for quick feedback."}</span>
-              {shop.askedFriends && <span className="text-muted-foreground"> Riya suggested checking fabric thickness.</span>}
+              {feedbackList.length > 0 ? (
+                <>
+                  <span className="font-bold">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>
+                  {suggestNames.length > 0 && <span className="text-muted-foreground"> {suggestNames.join(", ")} suggested checking fabric thickness.</span>}
+                </>
+              ) : (
+                <span className="font-bold">Ask friends for quick feedback.</span>
+              )}
             </div>
           </div>
           <div className="mt-2 grid grid-cols-2 gap-2">
