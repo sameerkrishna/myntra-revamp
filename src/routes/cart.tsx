@@ -165,12 +165,12 @@ function Cart() {
         <div className="bg-white rounded-2xl p-3 border border-border">
           <div className="flex items-center gap-2 mb-2">
             <span className="h-7 w-7 rounded-full bg-[#F3EEFF] text-[#5A3FBF] flex items-center justify-center"><Sparkles className="h-4 w-4" /></span>
-            <span className="text-[13px] font-extrabold">Purchase Confidence</span>
+            <span className="text-[13px] font-extrabold">Purchase Confidence <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></span>
             <span className="ml-auto text-[11px] font-bold bg-[#F3EEFF] text-[#5A3FBF] border border-[#C9B8F5] rounded-full px-2 py-0.5">Fit Score {fitScore}%</span>
           </div>
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
-            <div className="text-[12.5px] leading-snug">
+            <div className="flex-1 text-[12.5px] leading-snug">
               {feedbackList.length > 0 ? (
                 <>
                   <span className="font-bold">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>
@@ -180,6 +180,7 @@ function Cart() {
                 <span className="font-bold">Ask friends for quick feedback.</span>
               )}
             </div>
+            <span className="shrink-0 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
           </div>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button onClick={openFeedback} className="rounded-full border border-[#FF3F6C] text-[#FF3F6C] py-2 text-[12.5px] font-semibold">View feedback</button>

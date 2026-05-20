@@ -15,7 +15,7 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
           <Users className="h-5 w-5 text-[#F13AB1]" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-[13px] font-bold">Ask Friends</div>
+          <div className="text-[13px] font-bold">Ask Friends <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></div>
           <div className="text-[12px] text-muted-foreground">Get quick feedback before buying</div>
         </div>
         <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>

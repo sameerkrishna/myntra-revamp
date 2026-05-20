@@ -30,8 +30,8 @@ export function FitScoreCard({ size, score = 87 }: { size: string | null; score?
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 text-[13px] font-bold">
-            <span className="text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
             <Sparkles className="h-3.5 w-3.5 text-[#F13AB1]" /> Fit &amp; Fabric Confidence
+            <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
           </div>
           <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
             High confidence{size ? ` for selected size ${size}` : " — pick a size to refine"}
