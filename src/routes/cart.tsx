@@ -6,7 +6,7 @@ import { MLogo } from "@/components/MLogo";
 import { AskFriendsSheet } from "@/components/AskFriendsSheet";
 
 
-import { MOCK_FEEDBACK, setShop, useShop } from "@/lib/shop-store";
+import { setShop, useShop } from "@/lib/shop-store";
 import { toast } from "sonner";
 import shirt from "@/assets/shirt-white-1.jpg";
 import capRed from "@/assets/cap-red.jpg";
