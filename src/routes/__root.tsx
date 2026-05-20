@@ -42,8 +42,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1" },
-      { title: "Myntra — Fit Score & Ask Friends Prototype" },
-      { name: "description", content: "Mobile-first prototype of a Myntra-inspired shopping flow featuring Fit & Fabric Confidence Score and Collaborative Shopping." },
+      { title: "Myntra — Fit Score & Ask Friends  prototype" },
+      { name: "description", content: "Mobile-first prototype of a Myntra-inspired shopping flow featuring Fit & Fabric Confidence Score and Collaborative Shopping Experience." },
+      { property: "og:title", content: "Myntra — Fit Score & Ask Friends  prototype" },
+      { name: "twitter:title", content: "Myntra — Fit Score & Ask Friends  prototype" },
+      { property: "og:description", content: "Mobile-first prototype of a Myntra-inspired shopping flow featuring Fit & Fabric Confidence Score and Collaborative Shopping Experience." },
+      { name: "twitter:description", content: "Mobile-first prototype of a Myntra-inspired shopping flow featuring Fit & Fabric Confidence Score and Collaborative Shopping Experience." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1ca2373e-f80b-4fba-8935-85be63740497/id-preview-5ca9c432--7398086b-c845-4e6f-8caa-efafe587a987.lovable.app-1779253327311.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1ca2373e-f80b-4fba-8935-85be63740497/id-preview-5ca9c432--7398086b-c845-4e6f-8caa-efafe587a987.lovable.app-1779253327311.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
