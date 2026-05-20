@@ -37,12 +37,14 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
   const send = () => {
     setStage("sending");
     setTimeout(() => {
-      setShop({ askedFriends: true, feedback: MOCK_FEEDBACK });
+      const filtered = MOCK_FEEDBACK.filter((f) => selected.includes(f.name));
+      setShop({ askedFriends: true, feedback: filtered });
       setStage("result");
     }, 1200);
   };
 
-  const recCount = MOCK_FEEDBACK.filter((f) => f.recommend).length;
+  const feedbackList = shop.feedback ?? [];
+  const recCount = feedbackList.filter((f) => f.recommend).length;
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
