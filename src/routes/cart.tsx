@@ -163,9 +163,12 @@ function Cart() {
 
         {/* Purchase Confidence */}
         <div className="bg-white rounded-2xl p-3 border border-border">
+          <div className="flex items-center justify-end mb-1">
+            <span className="text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
+          </div>
           <div className="flex items-center gap-2 mb-2">
             <span className="h-7 w-7 rounded-full bg-[#F3EEFF] text-[#5A3FBF] flex items-center justify-center"><Sparkles className="h-4 w-4" /></span>
-            <span className="text-[13px] font-extrabold">Purchase Confidence <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></span>
+            <span className="text-[13px] font-extrabold">Purchase Confidence</span>
             <span className="ml-auto text-[11px] font-bold bg-[#F3EEFF] text-[#5A3FBF] border border-[#C9B8F5] rounded-full px-2 py-0.5">Fit Score {fitScore}%</span>
           </div>
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
