@@ -171,7 +171,7 @@ function Cart() {
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
             <div className="flex-1 text-[12.5px] leading-snug">
-              {feedbackList.length > 0 ? (
+            {feedbackList.length > 0 ? (
                 <>
                   <span className="font-bold">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>
                   {suggestNames.length > 0 && <span className="text-muted-foreground"> {suggestNames.join(", ")} suggested checking fabric thickness.</span>}
@@ -180,7 +180,6 @@ function Cart() {
                 <span className="font-bold">Ask friends for quick feedback.</span>
               )}
             </div>
-            <span className="shrink-0 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
           </div>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button onClick={openFeedback} className="rounded-full border border-[#FF3F6C] text-[#FF3F6C] py-2 text-[12.5px] font-semibold">View feedback</button>
