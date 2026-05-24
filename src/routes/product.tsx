@@ -192,7 +192,8 @@ function Product() {
       </div>
 
       {/* New features */}
-      <FitScoreCard size={shop.selectedSize} score={fitScore} />
+      <FitScoreCard size={shop.selectedSize} productId={sp?.id ?? PRIMARY_PRODUCT.id} />
+
       <AskFriendsButton />
 
 
