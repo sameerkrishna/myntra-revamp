@@ -53,6 +53,9 @@ export function FitScoreCard({ size, productId }: { size: string | null; product
             {size ? `Great match for your size ${size}` : "Select a size to see your confidence score"}
           </div>
         </div>
+      </div>
+
+
 
 
 
