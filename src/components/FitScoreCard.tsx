@@ -79,13 +79,8 @@ export function FitScoreCard({ size, score = 87 }: { size: string | null; score?
           <SheetHeader className="px-5 pt-5 pb-2">
             <SheetTitle className="text-base font-bold">Why this score?</SheetTitle>
           </SheetHeader>
-          <div className="px-5 pb-6 space-y-4">
-            {[
-              { t: "Fit confidence", d: "Based on brand sizing, your selected size, and how similar shoppers fit this style." },
-              { t: "Fabric confidence", d: "Cotton, opaque, machine washable — feels premium and breathable." },
-              { t: "Style confidence", d: "Matches formal and office-wear intent based on your browsing pattern." },
-              { t: "Return signal", d: "Fewer fit-related returns than similar products in this category." },
-            ].map((b, i) => (
+          <div className="px-5 pb-6 space-y-4 max-h-[70vh] overflow-y-auto">
+            {scoreFactors.map((b, i) => (
               <div key={b.t} className="flex gap-3">
                 <div className="mt-0.5 h-6 w-6 rounded-full bg-[#FFF0F4] text-[#FF3F6C] flex items-center justify-center text-[11px] font-bold">{i + 1}</div>
                 <div>
@@ -94,8 +89,15 @@ export function FitScoreCard({ size, score = 87 }: { size: string | null; score?
                 </div>
               </div>
             ))}
+            <div className="flex items-start gap-2 rounded-xl bg-secondary/50 border border-border px-3 py-2.5">
+              <Info className="h-3.5 w-3.5 mt-0.5 shrink-0 text-muted-foreground" />
+              <p className="text-[11.5px] text-muted-foreground leading-snug">
+                This is a confidence estimate, not a guarantee.
+              </p>
+            </div>
             <button onClick={() => setOpen(false)} className="mt-2 w-full rounded-full bg-[#FF3F6C] py-3 text-sm font-bold text-white">Got it</button>
           </div>
+
         </SheetContent>
       </Sheet>
     </div>
