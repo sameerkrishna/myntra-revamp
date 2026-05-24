@@ -176,7 +176,13 @@ function Cart() {
           <div className="flex items-center gap-2 mb-2">
             <span className="h-7 w-7 rounded-full bg-[#F3EEFF] text-[#5A3FBF] flex items-center justify-center"><Sparkles className="h-4 w-4" /></span>
             <span className="text-[13px] font-extrabold">Purchase Confidence</span>
-            <span className="ml-auto text-[11px] font-bold bg-[#F3EEFF] text-[#5A3FBF] border border-[#C9B8F5] rounded-full px-2 py-0.5">Fit Score {fitScore}%</span>
+            <span
+              className="ml-auto text-[11px] font-bold rounded-full px-2 py-0.5 border"
+              style={{ color: fitColor, borderColor: fitColor, backgroundColor: `${fitColor}1A` }}
+            >
+              Fit Score {fitScore == null ? "N/A" : `${fitScore}%`}
+            </span>
+
           </div>
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
