@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Users, Send, Check } from "lucide-react";
+import { Users, Send, Check, Clock, ShieldCheck } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { MOCK_FEEDBACK, setShop, useShop } from "@/lib/shop-store";
 
 const FRIENDS = ["Ananya", "Riya", "Karan"];
@@ -10,15 +11,18 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
   const [open, setOpen] = useState(openInitial);
   return (
     <>
-      <div className="mx-4 mb-4 rounded-2xl border border-border bg-white p-3 flex items-center gap-3 shadow-sm">
-        <div className="h-10 w-10 rounded-full bg-[#FFF0F4] flex items-center justify-center">
-          <Users className="h-5 w-5 text-[#F13AB1]" />
+      <div className="mx-4 mb-4 rounded-2xl border border-border bg-white p-3 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-[#FFF0F4] flex items-center justify-center">
+            <Users className="h-5 w-5 text-[#F13AB1]" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13px] font-bold">Ask Friends <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></div>
+            <div className="text-[12px] text-muted-foreground">Get quick feedback before buying</div>
+          </div>
+          <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="text-[13px] font-bold">Ask Friends <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></div>
-          <div className="text-[12px] text-muted-foreground">Get quick feedback before buying</div>
-        </div>
-        <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>
+        <div className="mt-2 text-[11px] text-muted-foreground/80 italic">Reduces purchase hesitation before checkout.</div>
       </div>
       <AskFriendsSheet open={open} onOpenChange={setOpen} />
     </>
@@ -30,6 +34,8 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
   const [selected, setSelected] = useState<string[]>(FRIENDS);
   const [scope, setScope] = useState("Product + size");
   const [question, setQuestion] = useState("Does this work for office wear?");
+  const [hideSize, setHideSize] = useState(false);
+  const [hidePrice, setHidePrice] = useState(false);
   const [stage, setStage] = useState<"compose" | "sending" | "result">(initialStep ?? (shop.askedFriends ? "result" : "compose"));
 
   const toggle = (f: string) => setSelected((s) => s.includes(f) ? s.filter((x) => x !== f) : [...s, f]);
@@ -97,6 +103,31 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
               />
             </section>
 
+            <section>
+              <div className="text-[12px] font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
+                <ShieldCheck className="h-3.5 w-3.5" /> PRIVACY
+              </div>
+              <div className="rounded-xl border border-border bg-white divide-y divide-border">
+                <label className="flex items-center justify-between px-3 py-2.5">
+                  <div>
+                    <div className="text-[13px] font-semibold">Hide size</div>
+                    <div className="text-[11.5px] text-muted-foreground">Friends won't see the size you picked.</div>
+                  </div>
+                  <Switch checked={hideSize} onCheckedChange={setHideSize} />
+                </label>
+                <label className="flex items-center justify-between px-3 py-2.5">
+                  <div>
+                    <div className="text-[13px] font-semibold">Hide price</div>
+                    <div className="text-[11.5px] text-muted-foreground">Share the product without revealing what it costs.</div>
+                  </div>
+                  <Switch checked={hidePrice} onCheckedChange={setHidePrice} />
+                </label>
+              </div>
+              <div className="mt-2 flex items-center gap-1.5 text-[11.5px] text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" /> Link expires in 24 hours.
+              </div>
+            </section>
+
             <button
               disabled={selected.length === 0 || stage === "sending"}
               onClick={send}
@@ -104,6 +135,7 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
             >
               {stage === "sending" ? "Sending…" : (<><Send className="h-4 w-4" /> Send for feedback</>)}
             </button>
+
           </div>
         )}
 
