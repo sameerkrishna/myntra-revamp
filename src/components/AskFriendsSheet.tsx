@@ -11,15 +11,18 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
   const [open, setOpen] = useState(openInitial);
   return (
     <>
-      <div className="mx-4 mb-4 rounded-2xl border border-border bg-white p-3 flex items-center gap-3 shadow-sm">
-        <div className="h-10 w-10 rounded-full bg-[#FFF0F4] flex items-center justify-center">
-          <Users className="h-5 w-5 text-[#F13AB1]" />
+      <div className="mx-4 mb-4 rounded-2xl border border-border bg-white p-3 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-[#FFF0F4] flex items-center justify-center">
+            <Users className="h-5 w-5 text-[#F13AB1]" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13px] font-bold">Ask Friends <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></div>
+            <div className="text-[12px] text-muted-foreground">Get quick feedback before buying</div>
+          </div>
+          <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="text-[13px] font-bold">Ask Friends <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></div>
-          <div className="text-[12px] text-muted-foreground">Get quick feedback before buying</div>
-        </div>
-        <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>
+        <div className="mt-2 text-[11px] text-muted-foreground/80 italic">Reduces purchase hesitation before checkout.</div>
       </div>
       <AskFriendsSheet open={open} onOpenChange={setOpen} />
     </>
