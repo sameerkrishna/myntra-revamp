@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Users, Send, Check } from "lucide-react";
+import { Users, Send, Check, Clock, ShieldCheck } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { MOCK_FEEDBACK, setShop, useShop } from "@/lib/shop-store";
 
 const FRIENDS = ["Ananya", "Riya", "Karan"];
