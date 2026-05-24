@@ -4,6 +4,8 @@ import { ArrowLeft, MapPin, ChevronDown, Heart, Share2, Trash2, ChevronRight, Tr
 import { MobileFrame } from "@/components/MobileFrame";
 import { MLogo } from "@/components/MLogo";
 import { AskFriendsSheet } from "@/components/AskFriendsSheet";
+import { getFitScore, scoreColor } from "@/lib/fit-score";
+
 
 
 import { setShop, useShop } from "@/lib/shop-store";
@@ -39,15 +41,18 @@ function Cart() {
 
   
   const [active, setActive] = useState<SectionId>("items");
-  const size = shop.selectedSize ?? "39";
+  const size = shop.selectedSize;
   const qty = shop.qty ?? 1;
   const sp = shop.selectedProduct;
   const unitPrice = sp?.price ?? 1249;
   const unitMrp = sp?.mrp ?? 2499;
   const discountPct = sp?.discount ?? 50;
-  const fitScore = sp?.fitScore ?? 87;
+  const productId = sp?.id ?? "lp-1";
+  const fitScore = getFitScore(productId, size);
+  const fitColor = fitScore == null ? "#7A5C2F" : scoreColor(fitScore);
   const brand = sp?.brand ?? "Louis Philippe";
   const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cott…";
+
   const feedbackList = shop.feedback ?? [];
   const recCount = feedbackList.filter((f) => f.recommend).length;
   const suggestNames = feedbackList.filter((f) => !f.recommend).map((f) => f.name);
@@ -129,12 +134,14 @@ function Cart() {
             <div className="mt-2 flex gap-2">
               <div className="relative">
                 <select
-                  value={size}
+                  value={size ?? ""}
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
                   onChange={(e) => { setShop({ selectedSize: e.target.value }); toast.success(`Size updated to ${e.target.value}`); }}
                   className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
                 >
+                  <option value="" disabled>Select size</option>
                   {SIZES.map((s) => <option key={s} value={s}>Size: {s}</option>)}
+
                 </select>
                 <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
@@ -169,7 +176,13 @@ function Cart() {
           <div className="flex items-center gap-2 mb-2">
             <span className="h-7 w-7 rounded-full bg-[#F3EEFF] text-[#5A3FBF] flex items-center justify-center"><Sparkles className="h-4 w-4" /></span>
             <span className="text-[13px] font-extrabold">Purchase Confidence</span>
-            <span className="ml-auto text-[11px] font-bold bg-[#F3EEFF] text-[#5A3FBF] border border-[#C9B8F5] rounded-full px-2 py-0.5">Fit Score {fitScore}%</span>
+            <span
+              className="ml-auto text-[11px] font-bold rounded-full px-2 py-0.5 border"
+              style={{ color: fitColor, borderColor: fitColor, backgroundColor: `${fitColor}1A` }}
+            >
+              Fit Score {fitScore == null ? "N/A" : `${fitScore}%`}
+            </span>
+
           </div>
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />

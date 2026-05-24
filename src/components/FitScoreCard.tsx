@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Check, Sparkles, Info } from "lucide-react";
+import { getFitScore, scoreColor } from "@/lib/fit-score";
+
 
 const breakdown = [
   { label: "Fit", value: "Runs true to size" },
@@ -18,23 +20,29 @@ const scoreFactors = [
   { t: "Return reasons", d: "Top reasons buyers returned this item — size, fabric, colour, or styling." },
 ];
 
-export function FitScoreCard({ size, score = 87 }: { size: string | null; score?: number }) {
+export function FitScoreCard({ size, productId }: { size: string | null; productId?: string | null; score?: number }) {
   const [open, setOpen] = useState(false);
-  const pct = score / 100;
+  const score = getFitScore(productId ?? "lp-1", size);
+  const pct = (score ?? 0) / 100;
+  const color = score == null ? "#B0B0B0" : scoreColor(score);
   return (
     <div className="mx-4 my-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
       <div className="flex items-center gap-3">
         <div className="relative h-16 w-16 shrink-0">
           <svg viewBox="0 0 64 64" className="h-16 w-16 -rotate-90">
             <circle cx="32" cy="32" r="28" stroke="#EAEAEC" strokeWidth="6" fill="none" />
-            <circle
-              cx="32" cy="32" r="28"
-              stroke="#03A685" strokeWidth="6" fill="none" strokeLinecap="round"
-              strokeDasharray={`${2 * Math.PI * 28}`}
-              strokeDashoffset={`${2 * Math.PI * 28 * (1 - pct)}`}
-            />
+            {score != null && (
+              <circle
+                cx="32" cy="32" r="28"
+                stroke={color} strokeWidth="6" fill="none" strokeLinecap="round"
+                strokeDasharray={`${2 * Math.PI * 28}`}
+                strokeDashoffset={`${2 * Math.PI * 28 * (1 - pct)}`}
+              />
+            )}
           </svg>
-          <div className="absolute inset-0 flex items-center justify-center text-[15px] font-extrabold text-[#03A685]">{score}%</div>
+          <div className="absolute inset-0 flex items-center justify-center text-[15px] font-extrabold" style={{ color }}>
+            {score == null ? "N/A" : `${score}%`}
+          </div>
         </div>
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 text-[13px] font-bold">
@@ -42,11 +50,13 @@ export function FitScoreCard({ size, score = 87 }: { size: string | null; score?
             <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
           </div>
           <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
-            {size ? `Great match for your size ${size}` : "High confidence — pick a size to refine"}
+            {size ? `Great match for your size ${size}` : "Select a size to see your confidence score"}
           </div>
         </div>
-
       </div>
+
+
+
 
 
 
