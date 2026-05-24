@@ -4,6 +4,8 @@ import { ArrowLeft, MapPin, ChevronDown, Heart, Share2, Trash2, ChevronRight, Tr
 import { MobileFrame } from "@/components/MobileFrame";
 import { MLogo } from "@/components/MLogo";
 import { AskFriendsSheet } from "@/components/AskFriendsSheet";
+import { getFitScore, scoreColor } from "@/lib/fit-score";
+
 
 
 import { setShop, useShop } from "@/lib/shop-store";
