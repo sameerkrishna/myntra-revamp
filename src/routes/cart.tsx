@@ -41,15 +41,18 @@ function Cart() {
 
   
   const [active, setActive] = useState<SectionId>("items");
-  const size = shop.selectedSize ?? "39";
+  const size = shop.selectedSize;
   const qty = shop.qty ?? 1;
   const sp = shop.selectedProduct;
   const unitPrice = sp?.price ?? 1249;
   const unitMrp = sp?.mrp ?? 2499;
   const discountPct = sp?.discount ?? 50;
-  const fitScore = sp?.fitScore ?? 87;
+  const productId = sp?.id ?? "lp-1";
+  const fitScore = getFitScore(productId, size);
+  const fitColor = fitScore == null ? "#7A5C2F" : scoreColor(fitScore);
   const brand = sp?.brand ?? "Louis Philippe";
   const title = sp?.title ?? "Men Slim Fit Easy to Iron Premium Cott…";
+
   const feedbackList = shop.feedback ?? [];
   const recCount = feedbackList.filter((f) => f.recommend).length;
   const suggestNames = feedbackList.filter((f) => !f.recommend).map((f) => f.name);
