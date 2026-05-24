@@ -103,6 +103,31 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
               />
             </section>
 
+            <section>
+              <div className="text-[12px] font-semibold text-muted-foreground mb-2 flex items-center gap-1.5">
+                <ShieldCheck className="h-3.5 w-3.5" /> PRIVACY
+              </div>
+              <div className="rounded-xl border border-border bg-white divide-y divide-border">
+                <label className="flex items-center justify-between px-3 py-2.5">
+                  <div>
+                    <div className="text-[13px] font-semibold">Hide size</div>
+                    <div className="text-[11.5px] text-muted-foreground">Friends won't see the size you picked.</div>
+                  </div>
+                  <Switch checked={hideSize} onCheckedChange={setHideSize} />
+                </label>
+                <label className="flex items-center justify-between px-3 py-2.5">
+                  <div>
+                    <div className="text-[13px] font-semibold">Hide price</div>
+                    <div className="text-[11.5px] text-muted-foreground">Share the product without revealing what it costs.</div>
+                  </div>
+                  <Switch checked={hidePrice} onCheckedChange={setHidePrice} />
+                </label>
+              </div>
+              <div className="mt-2 flex items-center gap-1.5 text-[11.5px] text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" /> Link expires in 24 hours.
+              </div>
+            </section>
+
             <button
               disabled={selected.length === 0 || stage === "sending"}
               onClick={send}
@@ -110,6 +135,7 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
             >
               {stage === "sending" ? "Sending…" : (<><Send className="h-4 w-4" /> Send for feedback</>)}
             </button>
+
           </div>
         )}
 
