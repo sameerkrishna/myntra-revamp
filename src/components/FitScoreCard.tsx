@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Info } from "lucide-react";
 
 const breakdown = [
   { label: "Fit", value: "Runs true to size" },
@@ -8,6 +8,14 @@ const breakdown = [
   { label: "Style match", value: "Good for office and formal occasions" },
   { label: "Similar shoppers", value: "82% kept this item" },
   { label: "Return signal", value: "Lower return rate than similar shirts" },
+];
+
+const scoreFactors = [
+  { t: "Brand size consistency", d: "How reliably this brand's sizes match their stated chart across recent orders." },
+  { t: "Similar shopper behaviour", d: "Kept vs. returned rates from shoppers with body type and past purchases like yours." },
+  { t: "Review sentiment", d: "Natural-language signals from reviews on fit, fabric feel, and quality." },
+  { t: "Fabric attributes", d: "Composition, weave, transparency, stretch, and breathability for this product." },
+  { t: "Return reasons", d: "Top reasons buyers returned this item — size, fabric, colour, or styling." },
 ];
 
 export function FitScoreCard({ size, score = 87 }: { size: string | null; score?: number }) {
