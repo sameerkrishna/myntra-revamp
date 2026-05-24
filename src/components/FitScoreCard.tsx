@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Check, Sparkles, Info } from "lucide-react";
+import { getFitScore, scoreColor } from "@/lib/fit-score";
+
 
 const breakdown = [
   { label: "Fit", value: "Runs true to size" },
