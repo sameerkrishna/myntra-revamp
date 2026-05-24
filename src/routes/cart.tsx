@@ -139,7 +139,9 @@ function Cart() {
                   onChange={(e) => { setShop({ selectedSize: e.target.value }); toast.success(`Size updated to ${e.target.value}`); }}
                   className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
                 >
+                  <option value="" disabled>Select size</option>
                   {SIZES.map((s) => <option key={s} value={s}>Size: {s}</option>)}
+
                 </select>
                 <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
