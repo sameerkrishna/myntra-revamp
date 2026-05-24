@@ -42,15 +42,10 @@ export function FitScoreCard({ size, score = 87 }: { size: string | null; score?
             <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span>
           </div>
           <div className="mt-0.5 text-[12px] text-muted-foreground leading-snug">
-            {size ? `High confidence for selected size ${size}` : "High confidence — pick a size to refine"}
+            {size ? `Great match for your size ${size}` : "High confidence — pick a size to refine"}
           </div>
-          {size && (
-            <div className="mt-1 inline-flex items-center gap-1 text-[10.5px] font-semibold bg-[#E6F7F2] text-[#03A685] rounded-full px-2 py-[2px]">
-              <Sparkles className="h-3 w-3" /> Score recalculated for size {size}
-            </div>
-          )}
-          <div className="mt-1 text-[11px] text-muted-foreground/80 italic">Reduces purchase hesitation before checkout.</div>
         </div>
+
       </div>
 
 

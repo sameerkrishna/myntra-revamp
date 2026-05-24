@@ -22,8 +22,8 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
           </div>
           <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>
         </div>
-        <div className="mt-2 text-[11px] text-muted-foreground/80 italic">Reduces purchase hesitation before checkout.</div>
       </div>
+
       <AskFriendsSheet open={open} onOpenChange={setOpen} />
     </>
   );
