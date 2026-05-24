@@ -134,7 +134,7 @@ function Cart() {
             <div className="mt-2 flex gap-2">
               <div className="relative">
                 <select
-                  value={size}
+                  value={size ?? ""}
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
                   onChange={(e) => { setShop({ selectedSize: e.target.value }); toast.success(`Size updated to ${e.target.value}`); }}
                   className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
