@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Heart, Star, Sparkles } from "lucide-react";
 import { setShop } from "@/lib/shop-store";
+import { getFitScore, scoreColor } from "@/lib/fit-score";
 
 export type Product = {
   id: string;
