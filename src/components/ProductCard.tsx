@@ -20,6 +20,8 @@ export type Product = {
 };
 
 export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
+  const listingScore = getFitScore(p.id, "39");
+  const listingColor = listingScore != null ? scoreColor(listingScore) : "#5A3FBF";
   const handleClick = () => {
     setShop({
       selectedProductImage: p.image,
@@ -27,7 +29,7 @@ export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
       selectedProduct: {
         id: p.id, brand: p.brand, title: p.title,
         price: p.price, mrp: p.mrp, discount: p.discount,
-        fitScore: p.fitScore, image: p.image,
+        fitScore: listingScore ?? p.fitScore, image: p.image,
       },
     });
   };
@@ -44,10 +46,13 @@ export function ProductCard({ p, to }: { p: Product; to?: "/product" }) {
         <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-white/95 rounded px-1.5 py-0.5 text-[10px] font-semibold shadow-sm">
           {p.rating} <Star className="h-2.5 w-2.5 fill-[#03A685] text-[#03A685]" /> <span className="text-muted-foreground">| {p.reviews}</span>
         </div>
-        {p.fitScore && (
-          <span className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-[#F3EEFF] text-[#5A3FBF] text-[10px] font-bold px-2 py-0.5 border border-[#C9B8F5] shadow-sm">
-            <Sparkles className="h-2.5 w-2.5 text-[#5A3FBF]" />
-            Fit {p.fitScore}%
+        {listingScore != null && (
+          <span
+            className="absolute top-2 left-2 inline-flex items-center gap-1 rounded-full bg-white text-[10px] font-bold px-2 py-0.5 border shadow-sm"
+            style={{ color: listingColor, borderColor: listingColor }}
+          >
+            <Sparkles className="h-2.5 w-2.5" style={{ color: listingColor }} />
+            Fit {listingScore}%
           </span>
         )}
       </div>
