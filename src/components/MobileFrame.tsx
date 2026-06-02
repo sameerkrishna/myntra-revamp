@@ -1,5 +1,10 @@
 import type { ReactNode } from "react";
 
+// Outer padding + rounded inner frame so the phone "edges" are always visible
+const OUTER = "min-h-screen w-full flex justify-center items-center bg-[#efefef] p-2 sm:p-4";
+const INNER_BASE =
+  "relative w-full max-w-[358px] bg-background shadow-[0_8px_40px_rgba(0,0,0,0.18)] rounded-[28px] overflow-hidden border border-black/10";
+
 export function MobileFrame({
   children,
   pad = true,
@@ -11,17 +16,17 @@ export function MobileFrame({
 }) {
   if (fit) {
     return (
-      <div className="h-screen w-full flex justify-center bg-[#efefef] overflow-hidden">
-        <div className="relative w-full max-w-[390px] h-screen bg-background shadow-[0_0_40px_rgba(0,0,0,0.08)] flex flex-col overflow-hidden">
+      <div className={`${OUTER} h-screen overflow-hidden`}>
+        <div className={`${INNER_BASE} h-[calc(100vh-1rem)] sm:h-[calc(100vh-2rem)] flex flex-col`}>
           {children}
         </div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen w-full flex justify-center bg-[#efefef]">
+    <div className={OUTER}>
       <div
-        className="relative w-full max-w-[390px] min-h-screen bg-background shadow-[0_0_40px_rgba(0,0,0,0.08)]"
+        className={`${INNER_BASE} min-h-[calc(100vh-1rem)] sm:min-h-[calc(100vh-2rem)]`}
         style={{ paddingBottom: pad ? 96 : 0 }}
       >
         {children}
