@@ -33,16 +33,16 @@ const categories = [
 
 function Home() {
   return (
-    <MobileFrame pad={false}>
+    <MobileFrame fit>
       {/* Header band */}
-      <div className="bg-gradient-to-b from-[#FFC97A] via-[#FFB347] to-[#FFA947] pt-3 pb-2 px-3">
-        <div className="flex items-center gap-1 text-[12.5px] text-foreground">
+      <div className="bg-gradient-to-b from-[#FFC97A] via-[#FFB347] to-[#FFA947] pt-2 pb-2 px-3 shrink-0">
+        <div className="flex items-center gap-1 text-[12px] text-foreground">
           <MapPin className="h-3.5 w-3.5" />
           <span>Deliver to <span className="font-bold">110002</span></span>
           <ChevronDown className="h-3.5 w-3.5" />
         </div>
 
-        <div className="mt-2 flex items-center gap-2">
+        <div className="mt-1.5 flex items-center gap-2">
           <SearchBar variant="yellow" />
           <div className="relative">
             <Bell className="h-5 w-5" />
@@ -53,62 +53,65 @@ function Home() {
         </div>
 
         {/* tabs */}
-        <div className="mt-3 flex items-center justify-between text-[12.5px] font-semibold">
-          <button className="pb-1.5 border-b-2 border-[#282C3F]">ALL</button>
-          <button className="pb-1.5 text-foreground/80">MEN</button>
-          <button className="pb-1.5 text-foreground/80">WOMEN</button>
-          <button className="pb-1.5 text-foreground/80">KIDS</button>
-          <span className="h-7 w-7 rounded-md bg-[#282C3F] flex items-center justify-center"><Grid3x3 className="h-4 w-4 text-white" /></span>
+        <div className="mt-2 flex items-center justify-between text-[12px] font-semibold">
+          <button className="pb-1 border-b-2 border-[#282C3F]">ALL</button>
+          <button className="pb-1 text-foreground/80">MEN</button>
+          <button className="pb-1 text-foreground/80">WOMEN</button>
+          <button className="pb-1 text-foreground/80">KIDS</button>
+          <span className="h-6 w-6 rounded-md bg-[#282C3F] flex items-center justify-center"><Grid3x3 className="h-3.5 w-3.5 text-white" /></span>
         </div>
 
         {/* category icons */}
-        <div className="mt-3 grid grid-cols-5 gap-2">
+        <div className="mt-2 grid grid-cols-5 gap-2">
           {categories.map((c) => (
-            <Link key={c.label} to="/listing" className="flex flex-col items-center gap-1">
-              <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white border border-white/60 shadow-sm">
+            <Link key={c.label} to="/listing" className="flex flex-col items-center gap-0.5">
+              <div className="h-11 w-11 rounded-2xl overflow-hidden bg-white border border-white/60 shadow-sm">
                 <img src={c.img} alt={c.label} loading="lazy" className="h-full w-full object-cover" />
               </div>
-              <span className={`text-[10.5px] ${c.active ? "text-[#FF3F6C] font-bold" : "text-foreground"}`}>{c.label}</span>
+              <span className={`text-[10px] ${c.active ? "text-[#FF3F6C] font-bold" : "text-foreground"}`}>{c.label}</span>
             </Link>
           ))}
         </div>
       </div>
 
       {/* Countdown */}
-      <div className="bg-white px-4 py-3 flex items-center gap-2 text-[12.5px]">
+      <div className="bg-white px-4 py-1.5 flex items-center gap-2 text-[12px] shrink-0">
         <span className="font-semibold">Summer Sale Ends In</span>
         {["06 h", "21 m", "41 s"].map((t) => (
-          <span key={t} className="rounded-md bg-[#FFE7DA] text-[#FF905A] font-bold px-2 py-0.5 text-[11px]">{t}</span>
+          <span key={t} className="rounded-md bg-[#FFE7DA] text-[#FF905A] font-bold px-1.5 py-0.5 text-[10px]">{t}</span>
         ))}
       </div>
 
-      {/* Hero */}
-      <div className="px-3">
-        <Link to="/listing" className="block relative rounded-2xl overflow-hidden">
-          <img src={hero} alt="Summer fashion sale" className="w-full h-[260px] object-cover" />
-          <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-            <div className="bg-white inline-block px-3 py-1 rounded font-extrabold tracking-wide text-[13px]">HIGHLANDER</div>
-            <div className="mt-1 text-white font-semibold text-[13px]">Unwind In Style</div>
-            <div className="text-white font-extrabold text-xl">MIN. 60% OFF</div>
+      {/* Main flex area splits remaining space between hero and brands */}
+      <div className="flex-1 min-h-0 flex flex-col">
+        {/* Hero */}
+        <div className="px-3 pt-2 shrink-0">
+          <Link to="/listing" className="block relative rounded-2xl overflow-hidden">
+            <img src={hero} alt="Summer fashion sale" className="w-full h-[170px] object-cover" />
+            <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+              <div className="bg-white inline-block px-2 py-0.5 rounded font-extrabold tracking-wide text-[12px]">HIGHLANDER</div>
+              <div className="mt-0.5 text-white font-semibold text-[12px]">Unwind In Style</div>
+              <div className="text-white font-extrabold text-lg leading-tight">MIN. 60% OFF</div>
+            </div>
+            <span className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-1.5 py-0.5 rounded">AD</span>
+          </Link>
+          <div className="flex justify-center gap-1 py-1">
+            {[0,1,2,3,4,5].map((i) => (
+              <span key={i} className={`h-1.5 rounded-full ${i === 1 ? "w-4 bg-[#FF3F6C]" : "w-1.5 bg-border"}`} />
+            ))}
           </div>
-          <span className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-1.5 py-0.5 rounded">AD</span>
-        </Link>
-        <div className="flex justify-center gap-1 py-2">
-          {[0,1,2,3,4,5].map((i) => (
-            <span key={i} className={`h-1.5 rounded-full ${i === 1 ? "w-4 bg-[#FF3F6C]" : "w-1.5 bg-border"}`} />
-          ))}
         </div>
-      </div>
 
-      {/* Continue Browsing band */}
-      <div className="mt-2 bg-gradient-to-b from-[#FFD89B] to-[#FFC97A] px-3 pt-4 pb-5">
-        <h3 className="text-center font-extrabold text-[16px] mb-3">Continue Browsing These Brands</h3>
-        <div className="flex gap-3 overflow-x-auto no-scrollbar">
-          {[brand1, brand2, brand3].map((src, i) => (
-            <Link to="/listing" key={i} className="shrink-0 w-[140px] h-[170px] rounded-xl overflow-hidden bg-white">
-              <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
-            </Link>
-          ))}
+        {/* Continue Browsing band — fills remaining space */}
+        <div className="flex-1 min-h-0 bg-gradient-to-b from-[#FFD89B] to-[#FFC97A] px-3 pt-2 pb-2 flex flex-col">
+          <h3 className="text-center font-extrabold text-[14px] mb-1.5 shrink-0">Continue Browsing These Brands</h3>
+          <div className="flex-1 min-h-0 flex gap-3 overflow-x-auto no-scrollbar">
+            {[brand1, brand2, brand3].map((src, i) => (
+              <Link to="/listing" key={i} className="shrink-0 h-full aspect-[140/170] rounded-xl overflow-hidden bg-white">
+                <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
