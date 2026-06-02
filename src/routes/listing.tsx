@@ -40,7 +40,7 @@ function Listing() {
   return (
     <MobileFrame pad={false}>
       {/* Top bar */}
-      <div className="sticky top-0 z-30 bg-white">
+      <div className="static z-30 bg-white">
         <div className="flex items-center gap-2 px-3 h-12 border-b border-border">
           <Link to="/"><ArrowLeft className="h-5 w-5" /></Link>
           <SearchBar variant="plain" compact />
@@ -98,7 +98,7 @@ function Listing() {
       </div>
 
       {/* Sticky Sort/Filter */}
-      <div className="sticky bottom-0 left-0 right-0 grid grid-cols-2 bg-white border-t border-border h-12 text-[13px] font-bold">
+      <div className="static grid grid-cols-2 bg-white border-t border-border h-12 text-[13px] font-bold">
         <button className="flex items-center justify-center gap-2 border-r border-border"><ArrowDownUp className="h-4 w-4" /> SORT</button>
         <button className="flex items-center justify-center gap-2"><SlidersHorizontal className="h-4 w-4" /> FILTER</button>
       </div>
