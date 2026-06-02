@@ -61,7 +61,7 @@ function Product() {
   return (
     <MobileFrame pad={false}>
       {/* Sticky top */}
-      <div className="static z-30 bg-white">
+      <div className="sticky top-0 z-30 bg-white">
         <div className="flex items-center gap-2 px-3 h-12">
           <Link to="/listing"><ArrowLeft className="h-5 w-5" /></Link>
           <SearchBar variant="plain" compact />

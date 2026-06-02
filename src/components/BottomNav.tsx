@@ -13,7 +13,7 @@ export function BottomNav() {
     { key: "bag", label: "Bag", to: "/cart" as const, sub: "" },
   ];
   return (
-    <nav className="static z-40 bg-white border-t border-border h-[68px] grid grid-cols-5 text-[10px]">
+    <nav className="absolute bottom-0 left-0 right-0 z-40 bg-white border-t border-border h-[68px] grid grid-cols-5 text-[10px]">
       {items.map((i) => {
         const active = (i.key === "home" && path === "/") || (i.key === "bag" && path === "/cart");
         return (
