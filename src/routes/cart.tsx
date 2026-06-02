@@ -90,7 +90,7 @@ function Cart() {
   return (
     <MobileFrame pad={false}>
       {/* Top */}
-      <div className="bg-white sticky top-0 z-30">
+      <div className="bg-white static z-30">
         <div className="flex items-center gap-3 px-3 h-12">
           <Link to="/product"><ArrowLeft className="h-5 w-5" /></Link>
           <div className="flex items-center gap-1 text-[14px]"><span className="font-bold">110002</span><ChevronDown className="h-4 w-4" /></div>
@@ -321,8 +321,8 @@ function Cart() {
         </p>
       </section>
 
-      {/* Sticky Place Order */}
-      <div className="absolute bottom-0 left-0 right-0 z-40">
+      {/* Place Order */}
+      <div className="static z-40">
         <div className="bg-[#FFF0F4] text-center text-[12px] py-1.5 font-semibold">1 Item selected for order</div>
         <button
           onClick={() => toast.success("Prototype complete: Order placed.", { description: "Thanks for trying the Fit Score + Ask Friends flow." })}
