@@ -33,7 +33,7 @@ const categories = [
 
 function Home() {
   return (
-    <MobileFrame>
+    <MobileFrame pad={false}>
       {/* Header band */}
       <div className="bg-gradient-to-b from-[#FFC97A] via-[#FFB347] to-[#FFA947] pt-3 pb-2 px-3">
         <div className="flex items-center gap-1 text-[12.5px] text-foreground">
