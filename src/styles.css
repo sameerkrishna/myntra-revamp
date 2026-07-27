@@ -38,37 +38,76 @@
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.975 0.002 270);          /* #F5F5F6 */
-  --foreground: oklch(0.27 0.03 270);            /* #282C3F */
+  --background: oklch(0.975 0.002 270); /* #F5F5F6 */
+  --foreground: oklch(0.27 0.03 270); /* #282C3F */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.27 0.03 270);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.27 0.03 270);
-  --primary: oklch(0.65 0.22 8);                 /* #FF3F6C */
+  --primary: oklch(0.65 0.22 8); /* #FF3F6C */
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.96 0.005 270);
   --secondary-foreground: oklch(0.27 0.03 270);
   --muted: oklch(0.96 0.005 270);
-  --muted-foreground: oklch(0.45 0.02 270);      /* #535766 */
-  --accent: oklch(0.62 0.23 358);                /* #F13AB1 */
+  --muted-foreground: oklch(0.45 0.02 270); /* #535766 */
+  --accent: oklch(0.62 0.23 358); /* #F13AB1 */
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.6 0.24 25);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.93 0.003 270);               /* #EAEAEC */
+  --border: oklch(0.93 0.003 270); /* #EAEAEC */
   --input: oklch(0.93 0.003 270);
   --ring: oklch(0.65 0.22 8);
-  --success: oklch(0.62 0.13 165);               /* #03A685 */
-  --discount: oklch(0.72 0.16 45);               /* #FF905A */
+  --success: oklch(0.62 0.13 165); /* #03A685 */
+  --discount: oklch(0.72 0.16 45); /* #FF905A */
   --myntra-pink: #ff3f6c;
   --myntra-pink-dark: #e72e86;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body { background: #efefef; color: var(--color-foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-  body { overflow-x: hidden; }
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body {
+    background: #efefef;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    overflow-x: hidden;
+  }
 }
 
 /* hide scrollbars on horizontal scroll rows */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Custom visible scrollbars for popups and scrollable containers */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 63, 108, 0.4) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 63, 108, 0.35);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 63, 108, 0.6);
+}
