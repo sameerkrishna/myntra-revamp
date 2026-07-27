@@ -47,7 +47,6 @@ const SECTIONS = [
 type SectionId = (typeof SECTIONS)[number]["id"];
 
 const SIZES = ["39", "40", "42"];
-
 function Cart() {
   const shop = useShop();
   const [askOpen, setAskOpen] = useState(false);
@@ -55,7 +54,18 @@ function Cart() {
 
   const [active, setActive] = useState<SectionId>("items");
   const size = shop.selectedSize;
-  const qty = shop.qty ?? 1;
+  const [qty, setQty] = useState(shop.qty ?? 1);
+
+  useEffect(() => {
+    if (shop.qty !== undefined) setQty(shop.qty);
+  }, [shop.qty]);
+
+  const handleQtyChange = (newQty: number) => {
+    setQty(newQty);
+    setShop({ qty: newQty });
+    toast.success(`Quantity set to ${newQty}`);
+  };
+
   const sp = shop.selectedProduct;
   const unitPrice = sp?.price ?? 1249;
   const unitMrp = sp?.mrp ?? 2499;
@@ -161,23 +171,23 @@ function Cart() {
           </div>
         </div>
 
-        <Link to="/product" className="block bg-white rounded-2xl p-3 flex gap-3 border border-border">
-          <img
-            src={sp?.image ?? shop.selectedProductImage ?? shirt}
-            alt=""
-            className="h-28 w-24 rounded-lg object-cover"
-          />
+        <div className="bg-white rounded-2xl p-3 flex gap-3 border border-border">
+          <Link to="/product" className="shrink-0">
+            <img
+              src={sp?.image ?? shop.selectedProductImage ?? shirt}
+              alt=""
+              className="h-28 w-24 rounded-lg object-cover"
+            />
+          </Link>
           <div className="flex-1 min-w-0">
-            <div className="text-[14px] font-extrabold">{brand}</div>
-            <div className="text-[12px] text-muted-foreground truncate">{title}</div>
+            <Link to="/product" className="block">
+              <div className="text-[14px] font-extrabold hover:text-[#FF3F6C]">{brand}</div>
+              <div className="text-[12px] text-muted-foreground truncate">{title}</div>
+            </Link>
             <div className="mt-2 flex gap-2">
               <div className="relative">
                 <select
                   value={size ?? ""}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
                   onChange={(e) => {
                     setShop({ selectedSize: e.target.value });
                     toast.success(`Size updated to ${e.target.value}`);
@@ -198,14 +208,7 @@ function Cart() {
               <div className="relative">
                 <select
                   value={qty}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                  }}
-                  onChange={(e) => {
-                    setShop({ qty: Number(e.target.value) });
-                    toast.success(`Quantity set to ${e.target.value}`);
-                  }}
+                  onChange={(e) => handleQtyChange(Number(e.target.value))}
                   className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
                 >
                   {[1, 2, 3, 4, 5].map((n) => (
@@ -231,7 +234,7 @@ function Cart() {
               <span className="text-[#03A685] font-bold">Tomorrow</span>
             </div>
           </div>
-        </Link>
+        </div>
 
         {/* Purchase Confidence */}
         <div className="bg-white rounded-2xl p-3 border border-border">
