@@ -17,10 +17,20 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
             <Users className="h-5 w-5 text-[#F13AB1]" />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-[13px] font-bold">Ask Friends <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">New Feature</span></div>
+            <div className="text-[13px] font-bold">
+              Ask Friends{" "}
+              <span className="ml-1 text-[8px] font-bold uppercase tracking-wider bg-[#F9F5E8] text-[#7A5C2F] border border-[#E5D9C3] rounded-full px-1.5 py-[1px]">
+                New Feature
+              </span>
+            </div>
             <div className="text-[12px] text-muted-foreground">Get quick feedback before buying</div>
           </div>
-          <button onClick={() => setOpen(true)} className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white">Ask</button>
+          <button
+            onClick={() => setOpen(true)}
+            className="rounded-full bg-[#FF3F6C] px-4 py-2 text-[12px] font-semibold text-white"
+          >
+            Ask
+          </button>
         </div>
       </div>
 
@@ -29,16 +39,26 @@ export function AskFriendsButton({ openInitial = false }: { openInitial?: boolea
   );
 }
 
-export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boolean; onOpenChange: (b: boolean) => void; initialStep?: "compose" | "result" }) {
+export function AskFriendsSheet({
+  open,
+  onOpenChange,
+  initialStep,
+}: {
+  open: boolean;
+  onOpenChange: (b: boolean) => void;
+  initialStep?: "compose" | "result";
+}) {
   const shop = useShop();
   const [selected, setSelected] = useState<string[]>(FRIENDS);
   const [scope, setScope] = useState("Product + size");
   const [question, setQuestion] = useState("Does this work for office wear?");
   const [hideSize, setHideSize] = useState(false);
   const [hidePrice, setHidePrice] = useState(false);
-  const [stage, setStage] = useState<"compose" | "sending" | "result">(initialStep ?? (shop.askedFriends ? "result" : "compose"));
+  const [stage, setStage] = useState<"compose" | "sending" | "result">(
+    initialStep ?? (shop.askedFriends ? "result" : "compose"),
+  );
 
-  const toggle = (f: string) => setSelected((s) => s.includes(f) ? s.filter((x) => x !== f) : [...s, f]);
+  const toggle = (f: string) => setSelected((s) => (s.includes(f) ? s.filter((x) => x !== f) : [...s, f]));
 
   const send = () => {
     setStage("sending");
@@ -54,8 +74,8 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-2xl p-0 max-h-[88vh] overflow-y-auto">
-        <SheetHeader className="px-5 pt-5 pb-3 border-b border-border">
+      <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-3xl overflow-hidden p-0 max-h-[85vh]">
+        <SheetHeader className="px-5 pt-5 pb-3 border-b border-border bg-white sticky top-0 z-10">
           <SheetTitle className="text-base font-bold">Ask friends before buying</SheetTitle>
         </SheetHeader>
 
@@ -67,9 +87,14 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
                 {FRIENDS.map((f) => {
                   const on = selected.includes(f);
                   return (
-                    <button key={f} onClick={() => toggle(f)}
-                      className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-[13px] ${on ? "border-[#FF3F6C] bg-[#FFF0F4] text-[#FF3F6C] font-semibold" : "border-border text-foreground"}`}>
-                      <span className="h-6 w-6 rounded-full bg-gradient-to-br from-[#F13AB1] to-[#FF905A] text-white text-[11px] font-bold flex items-center justify-center">{f[0]}</span>
+                    <button
+                      key={f}
+                      onClick={() => toggle(f)}
+                      className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-[13px] ${on ? "border-[#FF3F6C] bg-[#FFF0F4] text-[#FF3F6C] font-semibold" : "border-border text-foreground"}`}
+                    >
+                      <span className="h-6 w-6 rounded-full bg-gradient-to-br from-[#F13AB1] to-[#FF905A] text-white text-[11px] font-bold flex items-center justify-center">
+                        {f[0]}
+                      </span>
                       {f}
                       {on && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
                     </button>
@@ -84,8 +109,11 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
                 {SCOPES.map((s) => {
                   const on = scope === s;
                   return (
-                    <button key={s} onClick={() => setScope(s)}
-                      className={`rounded-xl border px-3 py-2 text-left text-[12.5px] ${on ? "border-[#FF3F6C] bg-[#FFF0F4] text-[#FF3F6C] font-semibold" : "border-border text-foreground"}`}>
+                    <button
+                      key={s}
+                      onClick={() => setScope(s)}
+                      className={`rounded-xl border px-3 py-2 text-left text-[12.5px] ${on ? "border-[#FF3F6C] bg-[#FFF0F4] text-[#FF3F6C] font-semibold" : "border-border text-foreground"}`}
+                    >
                       {s}
                     </button>
                   );
@@ -118,7 +146,9 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
                 <label className="flex items-center justify-between px-3 py-2.5">
                   <div>
                     <div className="text-[13px] font-semibold">Hide price</div>
-                    <div className="text-[11.5px] text-muted-foreground">Share the product without revealing what it costs.</div>
+                    <div className="text-[11.5px] text-muted-foreground">
+                      Share the product without revealing what it costs.
+                    </div>
                   </div>
                   <Switch checked={hidePrice} onCheckedChange={setHidePrice} />
                 </label>
@@ -133,9 +163,14 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
               onClick={send}
               className="w-full rounded-full bg-[#FF3F6C] py-3 text-sm font-bold text-white flex items-center justify-center gap-2 disabled:opacity-60"
             >
-              {stage === "sending" ? "Sending…" : (<><Send className="h-4 w-4" /> Send for feedback</>)}
+              {stage === "sending" ? (
+                "Sending…"
+              ) : (
+                <>
+                  <Send className="h-4 w-4" /> Send for feedback
+                </>
+              )}
             </button>
-
           </div>
         )}
 
@@ -150,9 +185,13 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
             {feedbackList.map((f) => (
               <div key={f.name} className="rounded-2xl border border-border bg-white p-3">
                 <div className="flex items-center gap-2">
-                  <span className="h-7 w-7 rounded-full bg-gradient-to-br from-[#F13AB1] to-[#FF905A] text-white text-[12px] font-bold flex items-center justify-center">{f.name[0]}</span>
+                  <span className="h-7 w-7 rounded-full bg-gradient-to-br from-[#F13AB1] to-[#FF905A] text-white text-[12px] font-bold flex items-center justify-center">
+                    {f.name[0]}
+                  </span>
                   <span className="text-[13px] font-bold">{f.name}</span>
-                  <span className={`ml-auto text-[11px] font-semibold px-2 py-0.5 rounded-full ${f.recommend ? "bg-[#E6F7F2] text-[#03A685]" : "bg-[#FFF1E6] text-[#FF905A]"}`}>
+                  <span
+                    className={`ml-auto text-[11px] font-semibold px-2 py-0.5 rounded-full ${f.recommend ? "bg-[#E6F7F2] text-[#03A685]" : "bg-[#FFF1E6] text-[#FF905A]"}`}
+                  >
                     {f.recommend ? "Recommends" : "Suggests check"}
                   </span>
                 </div>
@@ -162,17 +201,28 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
 
             {feedbackList.length > 0 && (
               <div className="rounded-2xl bg-[#FFF0F4] border border-[#FFD2DF] p-3 text-[12.5px]">
-                <span className="font-semibold text-[#FF3F6C]">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>{" "}
+                <span className="font-semibold text-[#FF3F6C]">
+                  {recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.
+                </span>{" "}
                 {feedbackList.length - recCount > 0 && (
-                  <span className="text-foreground">{feedbackList.length - recCount} {feedbackList.length - recCount === 1 ? "friend suggests" : "friends suggest"} checking fabric thickness.</span>
+                  <span className="text-foreground">
+                    {feedbackList.length - recCount}{" "}
+                    {feedbackList.length - recCount === 1 ? "friend suggests" : "friends suggest"} checking fabric
+                    thickness.
+                  </span>
                 )}
               </div>
             )}
 
-            <button onClick={() => onOpenChange(false)} className="w-full rounded-full bg-[#FF3F6C] py-3 text-sm font-bold text-white">
+            <button
+              onClick={() => onOpenChange(false)}
+              className="w-full rounded-full bg-[#FF3F6C] py-3 text-sm font-bold text-white"
+            >
               Add to Bag with feedback
             </button>
-            <button onClick={() => setStage("compose")} className="w-full text-[12.5px] text-muted-foreground py-1">Ask again</button>
+            <button onClick={() => setStage("compose")} className="w-full text-[12.5px] text-muted-foreground py-1">
+              Ask again
+            </button>
           </div>
         )}
       </SheetContent>
