@@ -91,11 +91,14 @@ export function FitScoreCard({ size, productId }: { size: string | null; product
       </div>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-3xl overflow-hidden p-0">
-          <SheetHeader className="px-5 pt-5 pb-2 border-b border-border/40">
+        <SheetContent
+          side="bottom"
+          className="max-w-[390px] mx-auto rounded-t-3xl overflow-hidden p-0 flex flex-col max-h-[85vh]"
+        >
+          <SheetHeader className="px-5 pt-5 pb-2 border-b border-border/40 shrink-0">
             <SheetTitle className="text-base font-bold">Why this score?</SheetTitle>
           </SheetHeader>
-          <div className="px-5 pb-6 space-y-4 max-h-[70vh] overflow-y-auto">
+          <div className="px-5 pb-8 space-y-4 overflow-y-auto flex-1 pt-4 custom-scrollbar">
             {scoreFactors.map((b, i) => (
               <div key={b.t} className="flex gap-3">
                 <div className="mt-0.5 h-6 w-6 rounded-full bg-[#FFF0F4] text-[#FF3F6C] flex items-center justify-center text-[11px] font-bold">
