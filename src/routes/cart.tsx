@@ -33,16 +33,25 @@ const SECTIONS = [
 type SectionId = (typeof SECTIONS)[number]["id"];
 
 const SIZES = ["39", "40", "42"];
-
 function Cart() {
   const shop = useShop();
   const [askOpen, setAskOpen] = useState(false);
   const [askInitial, setAskInitial] = useState<"compose" | "result">("compose");
 
-  
   const [active, setActive] = useState<SectionId>("items");
   const size = shop.selectedSize;
-  const qty = shop.qty ?? 1;
+  const [qty, setQty] = useState(shop.qty ?? 1);
+
+  useEffect(() => {
+    if (shop.qty !== undefined) setQty(shop.qty);
+  }, [shop.qty]);
+
+  const handleQtyChange = (newQty: number) => {
+    setQty(newQty);
+    setShop({ qty: newQty });
+    toast.success(`Quantity set to ${newQty}`);
+  };
+
   const sp = shop.selectedProduct;
   const unitPrice = sp?.price ?? 1249;
   const unitMrp = sp?.mrp ?? 2499;
@@ -119,37 +128,38 @@ function Cart() {
         </div>
         <div className="flex items-center gap-2 text-[13px]">
           <span className="h-5 w-5 rounded bg-[#FF3F6C] text-white flex items-center justify-center text-[11px]">✓</span>
-          <span className="font-bold">1/1 Items Selected</span>
+          <span className="font-bold">{qty}/{qty} {qty === 1 ? "Item" : "Items"} Selected</span>
           <span className="text-[#FF3F6C] font-bold">(₹{grand.toLocaleString("en-IN")})</span>
           <div className="ml-auto flex items-center gap-3">
             <Share2 className="h-4 w-4" /><Trash2 className="h-4 w-4" /><Heart className="h-4 w-4" />
           </div>
         </div>
 
-        <Link to="/product" className="block bg-white rounded-2xl p-3 flex gap-3 border border-border">
-          <img src={sp?.image ?? shop.selectedProductImage ?? shirt} alt="" className="h-28 w-24 rounded-lg object-cover" />
+        <div className="bg-white rounded-2xl p-3 flex gap-3 border border-border">
+          <Link to="/product" className="shrink-0">
+            <img src={sp?.image ?? shop.selectedProductImage ?? shirt} alt="" className="h-28 w-24 rounded-lg object-cover" />
+          </Link>
           <div className="flex-1 min-w-0">
-            <div className="text-[14px] font-extrabold">{brand}</div>
-            <div className="text-[12px] text-muted-foreground truncate">{title}</div>
+            <Link to="/product" className="block">
+              <div className="text-[14px] font-extrabold hover:text-[#FF3F6C]">{brand}</div>
+              <div className="text-[12px] text-muted-foreground truncate">{title}</div>
+            </Link>
             <div className="mt-2 flex gap-2">
               <div className="relative">
                 <select
                   value={size ?? ""}
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
                   onChange={(e) => { setShop({ selectedSize: e.target.value }); toast.success(`Size updated to ${e.target.value}`); }}
                   className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
                 >
                   <option value="" disabled>Select size</option>
                   {SIZES.map((s) => <option key={s} value={s}>Size: {s}</option>)}
-
                 </select>
                 <ChevronDown className="h-3 w-3 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
               <div className="relative">
                 <select
                   value={qty}
-                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                  onChange={(e) => { setShop({ qty: Number(e.target.value) }); toast.success(`Quantity set to ${e.target.value}`); }}
+                  onChange={(e) => handleQtyChange(Number(e.target.value))}
                   className="appearance-none rounded-md border border-border text-[12px] pl-2 pr-6 py-1 bg-white font-medium cursor-pointer"
                 >
                   {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>Qty: {n}</option>)}
@@ -166,7 +176,7 @@ function Cart() {
             <div className="mt-1.5 text-[11.5px] text-muted-foreground flex items-center gap-1">↻ 14 days return</div>
             <div className="mt-0.5 text-[11.5px] flex items-center gap-1"><MLogo className="h-3 w-3" /><span className="font-extrabold">EXPRESS+</span><span className="text-muted-foreground">Delivery by</span><span className="text-[#03A685] font-bold">Tomorrow</span></div>
           </div>
-        </Link>
+        </div>
 
         {/* Purchase Confidence */}
         <div className="bg-white rounded-2xl p-3 border border-border">
@@ -187,7 +197,7 @@ function Cart() {
           <div className="rounded-xl bg-[#F6F2FB] p-2.5 flex items-center gap-2">
             <Users className="h-4 w-4 text-[#F13AB1]" />
             <div className="flex-1 text-[12.5px] leading-snug">
-            {feedbackList.length > 0 ? (
+              {feedbackList.length > 0 ? (
                 <>
                   <span className="font-bold">{recCount} {recCount === 1 ? "friend recommends" : "friends recommend"} buying.</span>
                   {suggestNames.length > 0 && <span className="text-muted-foreground"> {suggestNames.join(", ")} suggested checking fabric thickness.</span>}
@@ -302,7 +312,7 @@ function Cart() {
 
         <div className="rounded-2xl overflow-hidden bg-gradient-to-r from-[#9B5BD6] to-[#3F7CD6] p-4 text-white flex items-center gap-3">
           <div className="flex-1">
-            <div className="text-[18px] font-extrabold leading-tight">Get 7.5%<br/>cashback</div>
+            <div className="text-[18px] font-extrabold leading-tight">Get 7.5%<br />cashback</div>
             <div className="text-[11px] opacity-90 mt-1">With Flipkart Axis &amp; SBI Credit Cards</div>
           </div>
           <button className="bg-white text-foreground font-bold text-[12.5px] rounded-md px-3 py-2 flex items-center gap-1">Apply Now <ChevronRight className="h-3.5 w-3.5" /></button>
@@ -322,8 +332,8 @@ function Cart() {
       </section>
 
       {/* Sticky Place Order */}
-      <div className="absolute bottom-0 left-0 right-0 z-40">
-        <div className="bg-[#FFF0F4] text-center text-[12px] py-1.5 font-semibold">1 Item selected for order</div>
+      <div className="sticky bottom-0 left-0 right-0 z-40 bg-white border-t border-border shadow-[0_-4px_12px_rgba(0,0,0,0.06)]">
+        <div className="bg-[#FFF0F4] text-center text-[12px] py-1.5 font-semibold">{qty} {qty === 1 ? "Item" : "Items"} selected for order</div>
         <button
           onClick={() => toast.success("Prototype complete: Order placed.", { description: "Thanks for trying the Fit Score + Ask Friends flow." })}
           className="w-full bg-[#FF3F6C] text-white font-extrabold text-[15px] py-4"

@@ -54,13 +54,14 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-2xl p-0 max-h-[88vh] overflow-y-auto">
-        <SheetHeader className="px-5 pt-5 pb-3 border-b border-border">
+      <SheetContent side="bottom" className="max-w-[390px] mx-auto rounded-t-3xl overflow-hidden p-0 max-h-[85vh] flex flex-col">
+        <SheetHeader className="px-5 pt-5 pb-3 border-b border-border bg-white shrink-0">
           <SheetTitle className="text-base font-bold">Ask friends before buying</SheetTitle>
         </SheetHeader>
 
+        <div className="overflow-y-auto flex-1 custom-scrollbar">
         {stage !== "result" && (
-          <div className="px-5 py-4 space-y-5">
+          <div className="px-5 pt-4 pb-8 space-y-5">
             <section>
               <div className="text-[12px] font-semibold text-muted-foreground mb-2">STEP 1 · SELECT FRIENDS</div>
               <div className="flex gap-2 flex-wrap">
@@ -140,7 +141,7 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
         )}
 
         {stage === "result" && (
-          <div className="px-5 py-4 space-y-3">
+          <div className="px-5 pt-4 pb-8 space-y-3">
             <div className="text-[12px] font-semibold text-muted-foreground">FRIENDS' FEEDBACK</div>
             {feedbackList.length === 0 && (
               <div className="rounded-2xl border border-dashed border-border bg-white p-4 text-center text-[12.5px] text-muted-foreground">
@@ -175,6 +176,7 @@ export function AskFriendsSheet({ open, onOpenChange, initialStep }: { open: boo
             <button onClick={() => setStage("compose")} className="w-full text-[12.5px] text-muted-foreground py-1">Ask again</button>
           </div>
         )}
+        </div>
       </SheetContent>
     </Sheet>
   );

@@ -33,9 +33,9 @@ const categories = [
 
 function Home() {
   return (
-    <MobileFrame>
+    <MobileFrame pad={false}>
       {/* Header band */}
-      <div className="bg-gradient-to-b from-[#FFC97A] via-[#FFB347] to-[#FFA947] pt-3 pb-2 px-3">
+      <div className="sticky top-0 z-30 bg-gradient-to-b from-[#FFC97A] via-[#FFB347] to-[#FFA947] pt-3 pb-2 px-3 shadow-sm">
         <div className="flex items-center gap-1 text-[12.5px] text-foreground">
           <MapPin className="h-3.5 w-3.5" />
           <span>Deliver to <span className="font-bold">110002</span></span>
@@ -94,7 +94,7 @@ function Home() {
           <span className="absolute top-2 right-2 bg-black/50 text-white text-[9px] px-1.5 py-0.5 rounded">AD</span>
         </Link>
         <div className="flex justify-center gap-1 py-2">
-          {[0,1,2,3,4,5].map((i) => (
+          {[0, 1, 2, 3, 4, 5].map((i) => (
             <span key={i} className={`h-1.5 rounded-full ${i === 1 ? "w-4 bg-[#FF3F6C]" : "w-1.5 bg-border"}`} />
           ))}
         </div>
